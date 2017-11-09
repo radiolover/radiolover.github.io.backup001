@@ -2,7 +2,7 @@
 
 
 {% for post in site.posts %}
-	    <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+	    [aaa]({{ post.date | date_to_string }}) » [{{ post.title }}]({{ post.url }})
 {% endfor %}
 
 
