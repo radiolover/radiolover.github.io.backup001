@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>C++语言体系设计哲学的一些随想(未完待续) | &lt;Coding/&gt; - 午夜场</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对于静态类型语言，其本质目标在于恰当地操作数据，得到期望的值。具体而言，需要： (1) 定义数据类型 你定义的数据是什么，是整形还是浮点还是字符。该类型的数据可以包含的值的范围是什么。 (2) 定义操作的含义 操作是严格数据类型相关的。操作表明了对了一个具有特定类型的数据，执行操作后产生什么样结果。   C++就是一个典型的静态类型语言。在C++中，无论是”数据类型”还是”操作”，都分为内置的和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++语言体系设计哲学的一些随想(未完待续)">
+<meta property="og:url" content="http://radiolover.github.io/old_post/C-语言体系设计哲学的一些随想-未完待续/index.html">
+<meta property="og:site_name" content="&lt;Coding&#x2F;&gt; - 午夜场">
+<meta property="og:description" content="对于静态类型语言，其本质目标在于恰当地操作数据，得到期望的值。具体而言，需要： (1) 定义数据类型 你定义的数据是什么，是整形还是浮点还是字符。该类型的数据可以包含的值的范围是什么。 (2) 定义操作的含义 操作是严格数据类型相关的。操作表明了对了一个具有特定类型的数据，执行操作后产生什么样结果。   C++就是一个典型的静态类型语言。在C++中，无论是”数据类型”还是”操作”，都分为内置的和">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2018-01-16T07:38:10.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++语言体系设计哲学的一些随想(未完待续)">
+<meta name="twitter:description" content="对于静态类型语言，其本质目标在于恰当地操作数据，得到期望的值。具体而言，需要： (1) 定义数据类型 你定义的数据是什么，是整形还是浮点还是字符。该类型的数据可以包含的值的范围是什么。 (2) 定义操作的含义 操作是严格数据类型相关的。操作表明了对了一个具有特定类型的数据，执行操作后产生什么样结果。   C++就是一个典型的静态类型语言。在C++中，无论是”数据类型”还是”操作”，都分为内置的和">
+  
+    <link rel="alternate" href="/atom.xml" title="&lt;Coding/&gt; - 午夜场" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">&lt;Coding/&gt; - 午夜场</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个想用技术改变世界却被世界用魔术改变的人的一些事情</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://radiolover.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C-语言体系设计哲学的一些随想-未完待续" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/C-语言体系设计哲学的一些随想-未完待续/" class="article-date">
+  <time datetime="2014-09-07T03:50:30.000Z" itemprop="datePublished">2014-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程语言/">编程语言</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++语言体系设计哲学的一些随想(未完待续)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><br></p>
+<p>对于静态类型语言，其本质目标在于恰当地操作数据，得到期望的值。具体而言，需要：</p>
+<p>(1) 定义数据类型</p>
+<p>你定义的数据是什么，是整形还是浮点还是字符。该类型的数据可以包含的值的范围是什么。</p>
+<p>(2) 定义操作的含义</p>
+<p>操作是严格数据类型相关的。操作表明了对了一个具有特定类型的数据，执行操作后产生什么样结果。 </p>
+<hr>
+<p>C++就是一个典型的静态类型语言。在C++中，无论是”数据类型”还是”操作”，都分为内置的和自定义的。</p>
+<p>C++的内置数据类型包括：</p>
+<p>（1）基本内置类型</p>
+<p>整形、浮点、布尔、字符….</p>
+<p>（2）STL库定义的类型</p>
+<p>例如常用的iostream、string、迭代器……</p>
+<p>此外C++和定义了复合类型机制，包括所有类型的引用、指针、数组，他们可以作为一个完整数据类型的一部分。</p>
+<p>顺便提一下，顶层/底层const、static、volatile…等修饰符，定义了数据的其他属性，这些属性也可以是一个完整数据类型的组成部分。</p>
+<p>而自定义类型，最常用的就是class、struct、union定义，还有函数签名，当然也可以使用复合类型机制定义自己类的引用、指针、数组等。</p>
+<hr>
+<p> 重点在于，无论是变量还是常量，必须属于某一特定的数据类型。因为操作只有基于精确的数据类型，其定义才有了确定的含义（在编译原理中叫做“语义”）。也就是说，在一个确定的操作集合中(例如C++语言内置的所有操作)，只要给一个变量赋于了数据类型，这个变量可以执行的操作也就确定了。定义变量nVal为int类型，那么nVal就可以参与加减乘除、关系运算、拷贝、转换为double、传递给函数形参、作为数组的下标………</p>
+<p>C++的“操作”，其含义非常广泛。其实C++语言已经通过成员函数、操作符重载、函数重载、构造函数定义的隐式类型转换…等机制，表明了 C++作为一个静态类型语言的本质：属于特定类型的数据，加上其上的操作。可以这样理解，任何一个操作，本质就是函数，操作符在C++语言内部也是被当作函数来看待的（这也能解释C++提供operator操作符重载机制的动机）；类的成员函数、友元函数，也是对类本身这个“数据类型”的操作。</p>
+<p>更进一步，操作本身也是一种特殊的数据类型。可以定义函数的指针、函数的数组，成员访问（-&gt;<em>,.</em>），只是可以被当作数据类型来使用的机会不多，也被语言本身限制了。</p>
+<p>C++的内置操作不太好理解，实际上我们常用的语言机制都是“操作”，具体包含了：</p>
+<p>（1）各种各样的操作符</p>
+<p>算术操作符、关系操作符、位运算、取地址、单目运算、解引用、数组元素访问….. </p>
+<p>（2）拷贝操作</p>
+<p>拷贝初始化、列表初始化（C++ 11）、赋值运算、函数传参、函数返回值、类型转换执行的临时变量拷贝……等其他非引用场景</p>
+<p>（3）数据类型转换</p>
+<p>类型转换也是一种操作。对于普通的操作，执行前需先匹配要操作的数据的类型。现实中，不可能总能保证在代码里提供类型严格匹配的数据，因此类型转换也是C++语言非常普遍的操作。</p>
+<p>该如何理解这样的操作呢？举个例子，例如： </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nVal = <span class="number">42</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">double</span> fVal = <span class="number">3.14</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">double</span> fValTwo;</span><br><span class="line"> </span><br><span class="line">fValTwo = fVal + nVal ; <span class="comment">// nVal类型提升为double</span></span><br></pre></td></tr></table></figure>
+<p> 上述代码最后一行的相加操作将执行类型提升。从编译器的角度看，此时将生成一个匿名的变量，变量的类新和需要匹配的类型(double)相同，之后执行int至double的类型转换操作，操作结果保存在这个匿名变量中。之后才会执行“+”操作。也就是说，如果选定了操作，那么就会期待若干数据类型完全匹配的操作数，为了满足这个条件，系统会执行类型转换。</p>
+<p>对于赋值操作，该操作会期待=右边操作数的数据类型和左边完全匹配，此时也会和上述相同，生成匿名变量，执行类型转换。准备工作完成后，再执行”=”操作。</p>
+<p>函数的调用也是基于相同的原理，即实参类型和形参类型的匹配。</p>
+<hr>
+<p>C++语言内部定义了异常复杂的类型转换规则（操作），只不过大多数对使用者是透明的。例如：</p>
+<p>整形提升 - char、short、bool会先转换为int；</p>
+<p>类型提升 - 防止精度损失；</p>
+<p>类型降低 -有精度损失，常见于拷贝操作。拷贝操作是将源对象严格匹配目标对象，因此不会有算术操作里的“整形提升”。拷贝包括了拷贝初始化、赋值运算、函数调用实参赋给形参</p>
+<p>非bool值都可以转换为bool，相反则转换为0/1；</p>
+<p>任意类新指针都可转换为void*；</p>
+<p>数组在不用于decltype、sizeof、typeid、取地址&amp;的情况下，会自动转换为指向第一个元素的指针。</p>
+<p>非底层const向底层const的转换 - 指向常量的引用和指针可以绑定到非常量上，和内置类型的提升与降低不同，底层const向非底层const的转换是非法的；</p>
+<p>子类向基类的转换 - 基类指针/引用可以指向子类，这是多态的基础。和底层const一样，相反的转换是非法的。</p>
+<hr>
+<p>-</p>
+<p>PS:关于底层const和继承体系类型转换的单向性：</p>
+<p>本质而言，一个数据的数据类型，可以执行的操作的集合越小，该数据可以引用/绑定的对象类型越广。例如：</p>
+<p>数据类型A，可以执行operA - operZ 共26个操作。数据类新B，可以执行的操作是A的子集，比如operH-operN。那么，B的引用/指针可以绑定到A（B的引用/指针可以接受A/A的指针赋值），相反则是非法的。</p>
+<p>const int <em>不能修改指向的int，而int </em>可以，也就是说，数据类型const int <em>的操作范围比int </em>要小，所以const int <em>可以绑定到int</em>指向的对象（本质上是指const int <em>可以接受int</em>赋值）。<br>在继承体系中，基类的操作范围肯定是小于子类的，所以 基类指针指向/基类引用 子类的合法的。</p>
+<p>造成这一切的原因就在于，对静态类型语言，编译器始终“固执”地、“自以为是”地按照其静态声明类型，来决定一个操作是否合法，而不去管这个对象实际指向的类型。可以想象，编译器“自以为是”地认为通过int <em>可以改变这个int，而不管这个int</em>实际指向的是const int，如果允许底层const向非底层const转换，就会带来冲突。</p>
+<p>-</p>
+<p>PS:基于该观点理解重载</p>
+<p>函数重载、操作符重载的本质，是用同一个名字定义了多个操作。结果是在编译阶段引入了一个确定具体操作的过程 - 从候选操作中选出最匹配的操作。而上述“类型转换”操作则是在运行阶段进行的。</p>
+<p>自定义操作，包括我们定义的普通函数、成员函数、重载的操作符、构造函数定义的隐式类型转换、拷贝构造函数定义的拷贝操作…</p>
+<p>未完待续</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/C-语言体系设计哲学的一些随想-未完待续/" data-id="cjchdlpss0000jpjxdjrwprxz" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/old_post/python中的“引用”和C-的引用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          python中的“引用”和C++的引用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/old_post/Linux-Bash环境下特殊符号转义的小结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Linux Bash环境下特殊符号转义的小结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soft-ap/">soft ap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/visual-c/">visual c++</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/soft-ap/" style="font-size: 10px;">soft ap</a> <a href="/tags/visual-c/" style="font-size: 10px;">visual c++</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">九月 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/old_post/字节序转换与结构体位域（bit-field）值的读取-Part-2-深入理解字节序和结构体位域存储方式/">字节序转换与结构体位域（bit field）值的读取 Part 2 - 深入理解字节序和结构体位域存储方式</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/字节序转换与结构体位域（bit-field）值的读取/">字节序转换与结构体位域（bit field）值的读取</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/时区之痒-从手机GPS模块获取的时间，真的是北京时间么？/">时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/手机定位原理-GPS-GLONASS-北斗-WIFI-基站/">手机定位原理 - GPS/GLONASS/北斗 + WIFI + 基站</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/架构设计中常见的语义耦合类型的总结/">架构设计中常见的语义耦合类型的总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Justin Su<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

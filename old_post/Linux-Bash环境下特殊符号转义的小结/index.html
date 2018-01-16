@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Linux Bash环境下特殊符号转义的小结 | &lt;Coding/&gt; - 午夜场</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在bash中，$、*、?、[、]、’、”、`、\、有特殊的含义。类似于编译器的预编译过程，bash在扫描命令行的过程中，会在文本层次上，优先解释所有的特殊字符，之后对转换完成的新命令行，进行内核的系统调用。 其中，反引号类似于函数调用，而不仅仅是简单的文本替换及匹配。 命令行中，被单引号引用的部分，其中所有的特殊字符按照普通字符解释； 双引号引用的部分，仅解释$（美元符号）、\（\n \t除外）、">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Bash环境下特殊符号转义的小结">
+<meta property="og:url" content="http://radiolover.github.io/old_post/Linux-Bash环境下特殊符号转义的小结/index.html">
+<meta property="og:site_name" content="&lt;Coding&#x2F;&gt; - 午夜场">
+<meta property="og:description" content="在bash中，$、*、?、[、]、’、”、`、\、有特殊的含义。类似于编译器的预编译过程，bash在扫描命令行的过程中，会在文本层次上，优先解释所有的特殊字符，之后对转换完成的新命令行，进行内核的系统调用。 其中，反引号类似于函数调用，而不仅仅是简单的文本替换及匹配。 命令行中，被单引号引用的部分，其中所有的特殊字符按照普通字符解释； 双引号引用的部分，仅解释$（美元符号）、\（\n \t除外）、">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2018-01-16T07:47:54.703Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Bash环境下特殊符号转义的小结">
+<meta name="twitter:description" content="在bash中，$、*、?、[、]、’、”、`、\、有特殊的含义。类似于编译器的预编译过程，bash在扫描命令行的过程中，会在文本层次上，优先解释所有的特殊字符，之后对转换完成的新命令行，进行内核的系统调用。 其中，反引号类似于函数调用，而不仅仅是简单的文本替换及匹配。 命令行中，被单引号引用的部分，其中所有的特殊字符按照普通字符解释； 双引号引用的部分，仅解释$（美元符号）、\（\n \t除外）、">
+  
+    <link rel="alternate" href="/atom.xml" title="&lt;Coding/&gt; - 午夜场" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">&lt;Coding/&gt; - 午夜场</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个想用技术改变世界却被世界用魔术改变的人的一些事情</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://radiolover.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-Bash环境下特殊符号转义的小结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/Linux-Bash环境下特殊符号转义的小结/" class="article-date">
+  <time datetime="2014-02-17T10:42:12.000Z" itemprop="datePublished">2014-02-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/工具/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux Bash环境下特殊符号转义的小结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在bash中，$、*、?、[、]、’、”、`、\、有特殊的含义。类似于编译器的预编译过程，bash在扫描命令行的过程中，会在文本层次上，优先解释所有的特殊字符，之后对转换完成的新命令行，进行内核的系统调用。</p>
+<p>其中，反引号类似于函数调用，而不仅仅是简单的文本替换及匹配。</p>
+<p>命令行中，被单引号引用的部分，其中所有的特殊字符按照普通字符解释；</p>
+<p>双引号引用的部分，仅解释$（美元符号）、\（\n \t除外）、`（反引号），解释后的文本仅按照普通文字处理（同单引号）。</p>
+<p>反引号相当于命令替换，引用的部分优先执行，将运行结果替换到外层的命令行文本中；反引号可以嵌套，但是嵌套时内部的反引号必须用\转义</p>
+<p>反斜杠用于命令换行，以及echo -e解释。</p>
+<p>网上各种文章常见的例子，其中第二行重点介绍一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># x=*                     </span><br><span class="line"># echo $x　　　　　　此行执行了两次替换，将$x替换为*，之后将*替换为当前目录下所有文件列表的文本，</span><br><span class="line"></span><br><span class="line">　　　　　　　　　　该文本作为参数赋给echo（bash会自动按照优先级，进行多层次替换 ）</span><br><span class="line">hello.sh menus.sh misc.sh phonebook tshift.sh</span><br><span class="line"># echo &apos;$x&apos;               $x不进行任何解释，直接将文本‘$x’作为参数赋给echo</span><br><span class="line">$x</span><br><span class="line"># echo &quot;$x&quot;              $x替换为*，但是由于在双引号内，*不做替换，因此文本“*”将作为参数赋给echo</span><br></pre></td></tr></table></figure></p>
+<p>Tips:</p>
+<p>大多数Linux Distribution的默认shell为bash，查询当前主机所有shell可执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat  /etc/shell</span><br></pre></td></tr></table></figure></p>
+<p>bash内部集成了40多条命令，通用格式为：</p>
+<p>$ 命令 [-选项] [参数]</p>
+<p>其中，”-“后为单字符选项，”–”后为完整的单词选项。一般来说，命令的某项功能(feature)，会同时支持单字符选项及对应的多字符选项。</p>
+<p>在bash中，<em>、?、[、]有特殊的含义，用于字符匹配。</em>代表0到多个字符，？代表单个字符。[]用于匹配单个字符，内部用短横线按照ASCII码顺序标明匹配的字符范围，或者枚举所有要匹配的字符。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/Linux-Bash环境下特殊符号转义的小结/" data-id="cjchdlpt20003jpjx3b1shnxm" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/old_post/C-语言体系设计哲学的一些随想-未完待续/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          C++语言体系设计哲学的一些随想(未完待续)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/old_post/Visual-C-编程实现Soft-AP-HostedNetwork-承载网络-功能/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Visual C++ 编程实现Soft AP (HostedNetwork / 承载网络) 功能</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soft-ap/">soft ap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/visual-c/">visual c++</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/soft-ap/" style="font-size: 10px;">soft ap</a> <a href="/tags/visual-c/" style="font-size: 10px;">visual c++</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">九月 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/old_post/字节序转换与结构体位域（bit-field）值的读取-Part-2-深入理解字节序和结构体位域存储方式/">字节序转换与结构体位域（bit field）值的读取 Part 2 - 深入理解字节序和结构体位域存储方式</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/字节序转换与结构体位域（bit-field）值的读取/">字节序转换与结构体位域（bit field）值的读取</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/时区之痒-从手机GPS模块获取的时间，真的是北京时间么？/">时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/手机定位原理-GPS-GLONASS-北斗-WIFI-基站/">手机定位原理 - GPS/GLONASS/北斗 + WIFI + 基站</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/架构设计中常见的语义耦合类型的总结/">架构设计中常见的语义耦合类型的总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Justin Su<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

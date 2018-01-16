@@ -1,56 +1,723 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-    <title>一个想用技术改变世界却被世界用魔术改变的人的一些事情</title>
+  <meta charset="utf-8">
+  
+
+  
+  <title>&lt;Coding/&gt; - 午夜场</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="- 午夜场; 一个想用技术改变世界却被世界用魔术改变的人的一些事情">
+<meta property="og:type" content="website">
+<meta property="og:title" content="&lt;Coding&#x2F;&gt; - 午夜场">
+<meta property="og:url" content="http://radiolover.github.io/index.html">
+<meta property="og:site_name" content="&lt;Coding&#x2F;&gt; - 午夜场">
+<meta property="og:description" content="- 午夜场; 一个想用技术改变世界却被世界用魔术改变的人的一些事情">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="&lt;Coding&#x2F;&gt; - 午夜场">
+<meta name="twitter:description" content="- 午夜场; 一个想用技术改变世界却被世界用魔术改变的人的一些事情">
+  
+    <link rel="alternate" href="/atom.xml" title="&lt;Coding/&gt; - 午夜场" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-<h1>手机定位原理 - GPS/GLONASS/北斗 + WIFI + 基站</h1>
-10 Mar 2015
-<p>
-卫星定位系统 - GPS/GLONASS/北斗：
-</p>
-<p>
-关于GPS、GLONASS、北斗、伽利略系统的科普请自行谷歌。
-</p>
-<p>
-GPS是使用最广泛的全球定位网络，几乎是所有智能手机的标配。进几年，俄罗斯的GLONASS定位功能也逐步加入智能手机芯片，与GPS组成双定位系统，定位速度大幅提升。中国自主研发的北斗导航系统，也开始出现在部分高端机型。至于欧洲的伽利略系统，目前还没有见到有哪部手机支持。
-</p>
-<p>
-卫星定位系统的优点在于精度高，误差一般在15米以内。GPS芯片会接收天空中多颗卫星的同步信号，然后根据信号的相位差，计算出具体的经纬度。保持多颗卫星信号同步，将误差控制在纳秒级以下，是GPS核心技术之一。
-</p>
-<p>
-下图是Android平台的著名GPS应用GPSTestPlus截图，可以看到本机支持GPS和GLONASS双定位系统（圆点为GPS卫星，三角形为GLONASS卫星），以及定位卫星在天球上的投影。
-</p>
-<p>
-WIFI定位：
-</p>
-<p>
-路由器默认都会进行SSID广播（除非用户手动配置关闭该功能），在广播帧包含了该路由器的MAC地址。此时需要采集装置进行MAC信息采集和信号强度信息采集，并上传到服务器，经过服务器的计算，保存为“MAC-经纬度”的映射。例如谷歌的街景采集车，曾经因隐私问题在德国被定性为非法。在国内，通过用户智能手机应用的后门功能采集，则是数据公司获取“MAC-经纬度”映射信息的主要途径。一般情况下，用户周边会有多个WIFI信号源，此时手机会默默地解析出所有WIFI的MAC地址，如果某些WIFI的信息在数据库中已经存在，则可以根据信号强度，推导出未知WIFI的经纬度。如果没有已知WIFI，而手机碰巧开着GPS，则也能完成数据采集。用户在不知情的情况下为地图公司搜集了所有的数据。可以想象，这样的数据量是非常庞大的。
-</p>
-<p>
-基站定位：
-</p>
-<p>
-基站数量远少于WIFI，且基站都有公开的位置数据，因此采集工作相对简单。
-</p>
-<p>
-多种定位途径的精确度：
-</p>
-<p>
-卫星定位系统 > WIFI > 基站（蜂窝网络）。因此优先级也是卫星定位系统最高。
-</p>
-<p>
-以Android设备为例，如果用户未关闭GPS功能，则优先使用GPS，从GPS模块读取时钟校准、经纬度等数据。如果同时还开着WIFI和基站，则会同时采用WIFI和基站辅助定位，减少GPS芯片的计算步骤，提高定位速度，这就是A-GPS。
-</p>
-<p>
-如果关闭GPS，而WIFI模块保持开启，手机会读取周边所有WIFI信号的MAC地址和信号强度，并上传至某公司（通常是地图供应商）的服务器，服务器查询并计算后会返回经纬度。WIFI的覆盖范围一般只在50米内，因此定位精度非常接近卫星定位系统。
-</p>
-<p>
-如果WIFI模块也关闭了，那么只有通过基站（蜂窝网络）了。此时手机会接收到基站的小区ID，上传至服务器查询，服务器同样返回经纬度。但此时精度较差，误差一般在100以上，毕竟基站的覆盖范围也是很大的，仅凭信号强度是难以计算出精确位置的。
-</p>
-<p>
-需要注意的是，WIFI方式和基站方式，都需要联网，要不你怎么和服务器联系？但是WIFI模块打开后，即可进行WIFI扫描和信息采集，不必连接到某一AP上，基站也是一样，不必打开蜂窝网络。因为向服务器发起查询请求，既可走蜂窝数据流量，也可走WIFI流量。
-</p>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">&lt;Coding/&gt; - 午夜场</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个想用技术改变世界却被世界用魔术改变的人的一些事情</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://radiolover.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-字节序转换与结构体位域（bit-field）值的读取-Part-2-深入理解字节序和结构体位域存储方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/字节序转换与结构体位域（bit-field）值的读取-Part-2-深入理解字节序和结构体位域存储方式/" class="article-date">
+  <time datetime="2018-01-16T07:30:34.000Z" itemprop="datePublished">2018-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/字节序转换与结构体位域（bit-field）值的读取-Part-2-深入理解字节序和结构体位域存储方式/">字节序转换与结构体位域（bit field）值的读取 Part 2 - 深入理解字节序和结构体位域存储方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/字节序转换与结构体位域（bit-field）值的读取-Part-2-深入理解字节序和结构体位域存储方式/" data-id="cjchdlptd0009jpjxgi1fj44g" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-字节序转换与结构体位域（bit-field）值的读取" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/字节序转换与结构体位域（bit-field）值的读取/" class="article-date">
+  <time datetime="2018-01-16T07:29:57.000Z" itemprop="datePublished">2018-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/字节序转换与结构体位域（bit-field）值的读取/">字节序转换与结构体位域（bit field）值的读取</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/字节序转换与结构体位域（bit-field）值的读取/" data-id="cjchdlptj000ejpjxomky9vin" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-时区之痒-从手机GPS模块获取的时间，真的是北京时间么？" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/时区之痒-从手机GPS模块获取的时间，真的是北京时间么？/" class="article-date">
+  <time datetime="2018-01-16T07:29:41.000Z" itemprop="datePublished">2018-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/时区之痒-从手机GPS模块获取的时间，真的是北京时间么？/">时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/时区之痒-从手机GPS模块获取的时间，真的是北京时间么？/" data-id="cjchdlptw000ljpjxwrfjas8r" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-手机定位原理-GPS-GLONASS-北斗-WIFI-基站" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/手机定位原理-GPS-GLONASS-北斗-WIFI-基站/" class="article-date">
+  <time datetime="2018-01-16T07:29:02.000Z" itemprop="datePublished">2018-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/手机定位原理-GPS-GLONASS-北斗-WIFI-基站/">手机定位原理 - GPS/GLONASS/北斗 + WIFI + 基站</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/手机定位原理-GPS-GLONASS-北斗-WIFI-基站/" data-id="cjchdlptn000jjpjx65mwv2q4" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-架构设计中常见的语义耦合类型的总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/架构设计中常见的语义耦合类型的总结/" class="article-date">
+  <time datetime="2018-01-16T07:28:45.000Z" itemprop="datePublished">2018-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/架构设计中常见的语义耦合类型的总结/">架构设计中常见的语义耦合类型的总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/架构设计中常见的语义耦合类型的总结/" data-id="cjchdlptx000ojpjxzqkbpxql" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-将P2P虚拟货币（比特币、莱特币-）的算力用于公共的分布式计算的猜想" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/将P2P虚拟货币（比特币、莱特币-）的算力用于公共的分布式计算的猜想/" class="article-date">
+  <time datetime="2018-01-16T07:27:52.000Z" itemprop="datePublished">2018-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/将P2P虚拟货币（比特币、莱特币-）的算力用于公共的分布式计算的猜想/">将P2P虚拟货币（比特币、莱特币....）的算力用于公共的分布式计算的猜想</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/将P2P虚拟货币（比特币、莱特币-）的算力用于公共的分布式计算的猜想/" data-id="cjchdlptl000gjpjxxmvd3xae" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Windows-8-8-1-禁用驱动签名最详细图文教程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/Windows-8-8-1-禁用驱动签名最详细图文教程/" class="article-date">
+  <time datetime="2018-01-16T07:20:11.000Z" itemprop="datePublished">2018-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/Windows-8-8-1-禁用驱动签名最详细图文教程/">Windows 8 / 8.1 禁用驱动签名最详细图文教程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/Windows-8-8-1-禁用驱动签名最详细图文教程/" data-id="cjchdlpta0006jpjx3zuzno80" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Git简易参考手册" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/Git简易参考手册/" class="article-date">
+  <time datetime="2017-09-15T13:52:47.000Z" itemprop="datePublished">2017-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/工具/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/Git简易参考手册/">Git简易参考手册</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果用过mercury(HG)，那么理解Git的运作方式就轻松多了。两者是相同的分布式版本管理工具，只是某些功能有着细微的差别 - Git的管理粒度更加细腻，因此操作上也比HG复杂一点。例如，修改文件并提交，hg会自动跟踪到，并不需要你去手动add，但是在git里，无论新增还是修改，都必须add相应的文件才可以commit.这样概念上可以保持一致性（计算机的美学）。</p>
+<p>安装和创建版本库：</p>
+<p>sudo apt-get install git</p>
+<p>创建全新仓库：</p>
+<p>mkdir new_repo</p>
+<p>cd new_repo</p>
+<p>git init</p>
+<p>此时即可创建一个全新的仓库。命令执行后，可以看到.git的隐藏文件夹，这是跟踪版本仓库的数据库。</p>
+<p>远程克隆仓库：</p>
+<p>git clone git@github.com:homer_simpson/repo_one.git</p>
+<p>执行后会在本地创建同名文件夹repo_one</p>
+<p>基本操作:</p>
+<p>git reflog   // git历史操作</p>
+<p>git add <filename>   // 新增filename 到版本库，或者修改了filename,提交到暂存区</filename></p>
+<p>git rm <filename>    // 从版本库移除filename</filename></p>
+<p>git commit -m “comment”  // 提交暂存区的内容到changeset，如果修改没有add/rm到暂存区，则提交不了修改</p>
+<p>git log  // 查看历史提交,完整信息</p>
+<p>git log –pretty=oneline  // 查看历史提交,单行显示</p>
+<p>git log –graph   // 分支图形方式显示LOG</p>
+<p>git log –abbrev-commit // 缩写方式显示LOG</p>
+<p>git diff (<filename>)  // 查看未add/rm的修改内容</filename></p>
+<p>git diff HEAD – readme.txt  // 查看已提交的修改内容</p>
+<p>git diff <source_branch> <target_branch>  // 查看分支间差异</target_branch></source_branch></p>
+<p>git status // 查看文件状态，新增/修改/删除，工作区/暂存区</p>
+<p>git checkout – <filename>  // 撤销工作区修改，暂存区和已提交的不受影响</filename></p>
+<p>git reset HEAD <filename> // unstage,暂存区撤销回工作区</filename></p>
+<p>git reset –hard HEAD^|<commit id="">  // 修改HEAD指针到新位置（等效于撤销已提交的修改，放弃commit id后的所有修改）</commit></p>
+<p>HEAD代表当前指针，HEAD^前一个版本，HEAD^^往前第二个版本，HEAD~50往前50个版本</p>
+<p>分支操作：</p>
+<p>GIT管理系统里，每个分支对应一个指针指向当前分支的头部节点，HEAD通过指向分支指针从而指向某一分支的头部节点。</p>
+<p>master分支是始终存在的。</p>
+<p>如无特殊说明，merge分支优先使用fast-forward模式，如果不能FF,则用普通的merge</p>
+<p>merge冲突时，Git用&lt;&lt;&lt;&lt;&lt;&lt;&lt;，=======，&gt;&gt;&gt;&gt;&gt;&gt;&gt;标记出不同分支的内容，此时直接编辑文件，add 文件并commit</p>
+<p>git branch  // 查看分支</p>
+<p>git branch <branch name="">  //创建分支</branch></p>
+<p>git branch -d <branch_name>  // 删除分支</branch_name></p>
+<p>git branch -D <branch_name> // 强制删除分支（一般当这个分支没有merge到其他分支而被丢弃时）</branch_name></p>
+<p>git checkout <branch_name> // 切换分支</branch_name></p>
+<p>git checkout -b <branche_name> // 创建分支并切换过去</branche_name></p>
+<p>git merge <branch_name> // 将branch_name merge到当前分支,包括合并文件，add文件+commit</branch_name></p>
+<p>git merge -m “comment” <branch_name>  // 为merge的commit添加注释</branch_name></p>
+<p>git merge –no-ff -m “comment” <branch_name> // 禁用ff模式</branch_name></p>
+<p>工作区暂存：</p>
+<p>git stash  // 当前分支的工作区内容暂存起来。此时git status是干净的</p>
+<p>git stash list // 列出暂存区</p>
+<p>git stash apply <stashname> // 恢复工作区</stashname></p>
+<p>git stash drop <stashname> // 删除stash列表项</stashname></p>
+<p>git stash pop  // 恢复stash顶端并删除</p>
+<p>标签管理；</p>
+<p>git tag // 查看标签</p>
+<p>git tag <tag_name> // 在当前分支当前头打上标签</tag_name></p>
+<p>git tag <tag_name>  <commit id="">  // 在某个commit上打上标签</commit></tag_name></p>
+<p>git show <tag_name>  // 显示标签对应commit的内容</tag_name></p>
+<p>git tag -a <tag_name> -m “blablabla…”  //添加标签信息</tag_name></p>
+<p>git tag -d <tag_name>   // 删除本地标签</tag_name></p>
+<p>git push origin <tag_name>  // 推送本地标签</tag_name></p>
+<p>git push origin –tags  // 推送本地所有标签</p>
+<p>git push origin :refs/tags/<tag_name>  //删除远程标签</tag_name></p>
+<p>远程协作：</p>
+<p>几个基本概念：</p>
+<p>远程引用：对远程仓库的引用，用一个名字标识，默认为origin.</p>
+<p>远程分支：远端服务器上仓库里的分支。</p>
+<p>远程跟踪分支：对远程分支状态的快照，用户不能自己修改，只有clone, fetch或者pull等同步到本地后变更，用于引用远程分支。名字为 remote/branch,例如origin/master</p>
+<p>本地分支：本地仓库的分支。</p>
+<p>跟踪分支：用于跟踪远程分支的本地分支，一般用于关联远程分支。</p>
+<p>一般情况下，如果要远程协作，需要建立远程引用，关联本地跟踪分支到远程跟踪分支。</p>
+<p>git clone时，自动创建远程引用，名字为origin；自动创建所有远程跟踪分支，包括origin/master；自动创建本地分支master并关联到origin/master上。git clone -o <remote>用于指定别的名字。因此，除了master外，其他分支需要自己手动创建跟踪分支。</remote></p>
+<p>git pull 只在当前分支是关联到远程分支上才有效，是git fetch和git merge的封装，只在当前分支上有效。</p>
+<p>git remote添加远程引用的情形，所有工作都要自己完成。</p>
+<p>所有的分支都是指针，并不是某一个changeset链条的实体，因此某一个“分支”可以自由指向任意链条，或者跟踪远程分支。</p>
+<p>可以远程引用多个仓库，仓库名不同，这样fetch到本地后，多个仓库的远程跟踪分支可以共存。自己推动也可以指定任意仓库来推送。分支只是指针，如果多个仓库的changeset有交集，那么本地只有一份changeset链条拷贝，多个仓库的同名分支指向不同的结点。</p>
+<p>查看远程分支信息：</p>
+<p>git remote // 查看本地已有的远程引用</p>
+<p>git remote -v // 查看远程仓库的详细信息 </p>
+<p>git ls-remote (remote) // 查看remote上的远程引用</p>
+<p>git remote show (remote) // 查看remote上的远程分支信息</p>
+<p>本地仓库关联远程仓库（非clone）:</p>
+<p>git remote add origin git@github.com:homer_simpson/repo_one.git   //  创建远程仓库名字，即表示创建本地仓库和远程仓库的连接。origin是约定俗成的远程仓库的名字</p>
+<p>git fetch origin  // 获取远程仓库更新的changeset,并更新远程跟踪分支到新位置（可能和本地跟踪分支分叉）</p>
+<p>git merge origin/master   // 将fetch下来的更新，merge到当前分支</p>
+<p>本地新分支推送到远端（跟踪关系自动建立）：</p>
+<p>git push origin serverfix // 推送本地分支更新，或本地新分支到仓库上</p>
+<p>git push origin serverfix:serverfix // 等效于上一条命令</p>
+<p>git push origin serverfix:awesomebranch // 推送本地分支到远程另一个名字的分支</p>
+<p>对远端新分支建立本地跟踪分支：</p>
+<p>git fetch origin  // 先获取远程新分支</p>
+<p>git checkout -b serverfix origin/serverfix  // 建立serverfix分支为origin/serverfix的跟踪分支(指针指向origin/serverfix，以origin/serverfix为start point)</p>
+<p>git checkout –track origin/serverfix  // 等效于上一条</p>
+<p>git checkout -b sf origin/serverfix  // 用一个不同的本地跟踪分支名字</p>
+<p>git branch -u|–set-upstream origin/serverfix  // 将当前分支跟踪到远程分支(当前分支变为远程分支的跟踪分支，分支只是指针，因此可以跳跃到任何地点)</p>
+<p>拉取推送：</p>
+<p>git pull  // git fetch + git merge,必须是跟踪分支</p>
+<p>git push <remote>  <branch>  // 将branch的内容推送的remote,必须是个跟踪分支</branch></remote></p>
+<p>git push -u origin master   |  git push –set-upstream origin master  // 第一次push，先关联本地分支和远程分支</p>
+<p>删除远程分支：</p>
+<p>git push origin –delete serverfix</p>
+<p>Git系统配置：</p>
+<p>git config –global user.name “Your Name”  //设置名字</p>
+<p>git config –global user.email “email@example.com”// 设置邮箱地址</p>
+<p>git config –global color.ui true  // 显示不同的颜色</p>
+<p>git config –global alias.st status  // 配置别名</p>
+<p>可在根工作区创建.gitignore，配置GIT不跟踪的文件，但是可用命令git add -f <file_name>强行添加， git check-ignore -v <file_name>可以检查当前文件是否被过滤。</file_name></file_name></p>
+<p>.git/config保存全局配置。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/Git简易参考手册/" data-id="cjchdlpsx0001jpjxsoglu1qx" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python中的“引用”和C-的引用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/python中的“引用”和C-的引用/" class="article-date">
+  <time datetime="2016-06-26T10:48:18.000Z" itemprop="datePublished">2016-06-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程语言/">编程语言</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/python中的“引用”和C-的引用/">python中的“引用”和C++的引用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>python并不刻意区分“按值传递”和“按引用传递”。</p>
+<p>在底层，python将值分为不可变对象(比如int,str)和可变对象(比如列表)。所有的变量都是对某个对象的引用，赋值（=）和函数参数传递，都将改变变量所引用的对象。</p>
+<p>对于不可变对象，赋值和传参将导致新创建对象，这和C++的引用行为是不同的。此时，赋值和传参是按值传递。</p>
+<p>对于可变对象，赋值和传参，和C++引用的行为一致，是真正的按引用传递。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/python中的“引用”和C-的引用/" data-id="cjchdlptc0008jpjx7ygdytyf" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C-语言体系设计哲学的一些随想-未完待续" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/old_post/C-语言体系设计哲学的一些随想-未完待续/" class="article-date">
+  <time datetime="2014-09-07T03:50:30.000Z" itemprop="datePublished">2014-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程语言/">编程语言</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/old_post/C-语言体系设计哲学的一些随想-未完待续/">C++语言体系设计哲学的一些随想(未完待续)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><br></p>
+<p>对于静态类型语言，其本质目标在于恰当地操作数据，得到期望的值。具体而言，需要：</p>
+<p>(1) 定义数据类型</p>
+<p>你定义的数据是什么，是整形还是浮点还是字符。该类型的数据可以包含的值的范围是什么。</p>
+<p>(2) 定义操作的含义</p>
+<p>操作是严格数据类型相关的。操作表明了对了一个具有特定类型的数据，执行操作后产生什么样结果。 </p>
+<hr>
+<p>C++就是一个典型的静态类型语言。在C++中，无论是”数据类型”还是”操作”，都分为内置的和自定义的。</p>
+<p>C++的内置数据类型包括：</p>
+<p>（1）基本内置类型</p>
+<p>整形、浮点、布尔、字符….</p>
+<p>（2）STL库定义的类型</p>
+<p>例如常用的iostream、string、迭代器……</p>
+<p>此外C++和定义了复合类型机制，包括所有类型的引用、指针、数组，他们可以作为一个完整数据类型的一部分。</p>
+<p>顺便提一下，顶层/底层const、static、volatile…等修饰符，定义了数据的其他属性，这些属性也可以是一个完整数据类型的组成部分。</p>
+<p>而自定义类型，最常用的就是class、struct、union定义，还有函数签名，当然也可以使用复合类型机制定义自己类的引用、指针、数组等。</p>
+<hr>
+<p> 重点在于，无论是变量还是常量，必须属于某一特定的数据类型。因为操作只有基于精确的数据类型，其定义才有了确定的含义（在编译原理中叫做“语义”）。也就是说，在一个确定的操作集合中(例如C++语言内置的所有操作)，只要给一个变量赋于了数据类型，这个变量可以执行的操作也就确定了。定义变量nVal为int类型，那么nVal就可以参与加减乘除、关系运算、拷贝、转换为double、传递给函数形参、作为数组的下标………</p>
+<p>C++的“操作”，其含义非常广泛。其实C++语言已经通过成员函数、操作符重载、函数重载、构造函数定义的隐式类型转换…等机制，表明了 C++作为一个静态类型语言的本质：属于特定类型的数据，加上其上的操作。可以这样理解，任何一个操作，本质就是函数，操作符在C++语言内部也是被当作函数来看待的（这也能解释C++提供operator操作符重载机制的动机）；类的成员函数、友元函数，也是对类本身这个“数据类型”的操作。</p>
+<p>更进一步，操作本身也是一种特殊的数据类型。可以定义函数的指针、函数的数组，成员访问（-&gt;<em>,.</em>），只是可以被当作数据类型来使用的机会不多，也被语言本身限制了。</p>
+<p>C++的内置操作不太好理解，实际上我们常用的语言机制都是“操作”，具体包含了：</p>
+<p>（1）各种各样的操作符</p>
+<p>算术操作符、关系操作符、位运算、取地址、单目运算、解引用、数组元素访问….. </p>
+<p>（2）拷贝操作</p>
+<p>拷贝初始化、列表初始化（C++ 11）、赋值运算、函数传参、函数返回值、类型转换执行的临时变量拷贝……等其他非引用场景</p>
+<p>（3）数据类型转换</p>
+<p>类型转换也是一种操作。对于普通的操作，执行前需先匹配要操作的数据的类型。现实中，不可能总能保证在代码里提供类型严格匹配的数据，因此类型转换也是C++语言非常普遍的操作。</p>
+<p>该如何理解这样的操作呢？举个例子，例如： </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nVal = <span class="number">42</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">double</span> fVal = <span class="number">3.14</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">double</span> fValTwo;</span><br><span class="line"> </span><br><span class="line">fValTwo = fVal + nVal ; <span class="comment">// nVal类型提升为double</span></span><br></pre></td></tr></table></figure>
+<p> 上述代码最后一行的相加操作将执行类型提升。从编译器的角度看，此时将生成一个匿名的变量，变量的类新和需要匹配的类型(double)相同，之后执行int至double的类型转换操作，操作结果保存在这个匿名变量中。之后才会执行“+”操作。也就是说，如果选定了操作，那么就会期待若干数据类型完全匹配的操作数，为了满足这个条件，系统会执行类型转换。</p>
+<p>对于赋值操作，该操作会期待=右边操作数的数据类型和左边完全匹配，此时也会和上述相同，生成匿名变量，执行类型转换。准备工作完成后，再执行”=”操作。</p>
+<p>函数的调用也是基于相同的原理，即实参类型和形参类型的匹配。</p>
+<hr>
+<p>C++语言内部定义了异常复杂的类型转换规则（操作），只不过大多数对使用者是透明的。例如：</p>
+<p>整形提升 - char、short、bool会先转换为int；</p>
+<p>类型提升 - 防止精度损失；</p>
+<p>类型降低 -有精度损失，常见于拷贝操作。拷贝操作是将源对象严格匹配目标对象，因此不会有算术操作里的“整形提升”。拷贝包括了拷贝初始化、赋值运算、函数调用实参赋给形参</p>
+<p>非bool值都可以转换为bool，相反则转换为0/1；</p>
+<p>任意类新指针都可转换为void*；</p>
+<p>数组在不用于decltype、sizeof、typeid、取地址&amp;的情况下，会自动转换为指向第一个元素的指针。</p>
+<p>非底层const向底层const的转换 - 指向常量的引用和指针可以绑定到非常量上，和内置类型的提升与降低不同，底层const向非底层const的转换是非法的；</p>
+<p>子类向基类的转换 - 基类指针/引用可以指向子类，这是多态的基础。和底层const一样，相反的转换是非法的。</p>
+<hr>
+<p>-</p>
+<p>PS:关于底层const和继承体系类型转换的单向性：</p>
+<p>本质而言，一个数据的数据类型，可以执行的操作的集合越小，该数据可以引用/绑定的对象类型越广。例如：</p>
+<p>数据类型A，可以执行operA - operZ 共26个操作。数据类新B，可以执行的操作是A的子集，比如operH-operN。那么，B的引用/指针可以绑定到A（B的引用/指针可以接受A/A的指针赋值），相反则是非法的。</p>
+<p>const int <em>不能修改指向的int，而int </em>可以，也就是说，数据类型const int <em>的操作范围比int </em>要小，所以const int <em>可以绑定到int</em>指向的对象（本质上是指const int <em>可以接受int</em>赋值）。<br>在继承体系中，基类的操作范围肯定是小于子类的，所以 基类指针指向/基类引用 子类的合法的。</p>
+<p>造成这一切的原因就在于，对静态类型语言，编译器始终“固执”地、“自以为是”地按照其静态声明类型，来决定一个操作是否合法，而不去管这个对象实际指向的类型。可以想象，编译器“自以为是”地认为通过int <em>可以改变这个int，而不管这个int</em>实际指向的是const int，如果允许底层const向非底层const转换，就会带来冲突。</p>
+<p>-</p>
+<p>PS:基于该观点理解重载</p>
+<p>函数重载、操作符重载的本质，是用同一个名字定义了多个操作。结果是在编译阶段引入了一个确定具体操作的过程 - 从候选操作中选出最匹配的操作。而上述“类型转换”操作则是在运行阶段进行的。</p>
+<p>自定义操作，包括我们定义的普通函数、成员函数、重载的操作符、构造函数定义的隐式类型转换、拷贝构造函数定义的拷贝操作…</p>
+<p>未完待续</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://radiolover.github.io/old_post/C-语言体系设计哲学的一些随想-未完待续/" data-id="cjchdlpss0000jpjxdjrwprxz" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soft-ap/">soft ap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/visual-c/">visual c++</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/soft-ap/" style="font-size: 10px;">soft ap</a> <a href="/tags/visual-c/" style="font-size: 10px;">visual c++</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">九月 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/old_post/字节序转换与结构体位域（bit-field）值的读取-Part-2-深入理解字节序和结构体位域存储方式/">字节序转换与结构体位域（bit field）值的读取 Part 2 - 深入理解字节序和结构体位域存储方式</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/字节序转换与结构体位域（bit-field）值的读取/">字节序转换与结构体位域（bit field）值的读取</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/时区之痒-从手机GPS模块获取的时间，真的是北京时间么？/">时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/手机定位原理-GPS-GLONASS-北斗-WIFI-基站/">手机定位原理 - GPS/GLONASS/北斗 + WIFI + 基站</a>
+          </li>
+        
+          <li>
+            <a href="/old_post/架构设计中常见的语义耦合类型的总结/">架构设计中常见的语义耦合类型的总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Justin Su<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
 </body>
 </html>
