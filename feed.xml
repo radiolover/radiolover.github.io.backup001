@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="radiolover.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="radiolover.github.io/" rel="alternate" type="text/html" /><updated>2018-01-17T20:41:32+08:00</updated><id>radiolover.github.io/</id><title type="html">&lt;Coding /&gt;
+ - 午夜场</title><subtitle>&lt;Coding/&gt; - 午夜场 - 一个想用技术改变世界却被世界用魔术改变的人的一些事情 - 科技美学 - 爱好天文的工程师 - 上海 - WIRELESS - 区块链 - 自驾旅行 - 尼康爱好者 - EDM - 火车迷 - 极简主义</subtitle><entry><title type="html">Git简易参考手册</title><link href="radiolover.github.io/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html" rel="alternate" type="text/html" title="Git简易参考手册" /><published>2017-09-16T05:52:47+08:00</published><updated>2017-09-16T05:52:47+08:00</updated><id>radiolover.github.io/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C</id><content type="html" xml:base="radiolover.github.io/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html">&lt;p&gt;如果用过mercury(HG)，那么理解Git的运作方式就轻松多了。两者是相同的分布式版本管理工具，只是某些功能有着细微的差别 - Git的管理粒度更加细腻，因此操作上也比HG复杂一点。例如，修改文件并提交，hg会自动跟踪到，并不需要你去手动add，但是在git里，无论新增还是修改，都必须add相应的文件才可以commit.这样概念上可以保持一致性（计算机的美学）。&lt;/p&gt;
+
+&lt;p&gt;安装和创建版本库：&lt;/p&gt;
+
+&lt;p&gt;sudo apt-get install git&lt;/p&gt;
+
+&lt;p&gt;创建全新仓库：&lt;/p&gt;
+
+&lt;p&gt;mkdir new_repo&lt;/p&gt;
+
+&lt;p&gt;cd new_repo&lt;/p&gt;
+
+&lt;p&gt;git init&lt;/p&gt;
+
+&lt;p&gt;此时即可创建一个全新的仓库。命令执行后，可以看到.git的隐藏文件夹，这是跟踪版本仓库的数据库。&lt;/p&gt;
+
+&lt;p&gt;远程克隆仓库：&lt;/p&gt;
+
+&lt;p&gt;git clone git@github.com:homer_simpson/repo_one.git&lt;/p&gt;
+
+&lt;p&gt;执行后会在本地创建同名文件夹repo_one&lt;/p&gt;
+
+&lt;p&gt;基本操作:&lt;/p&gt;
+
+&lt;p&gt;git reflog   // git历史操作&lt;/p&gt;
+
+&lt;p&gt;git add &lt;filename&gt;   // 新增filename 到版本库，或者修改了filename,提交到暂存区&lt;/filename&gt;&lt;/p&gt;
+
+&lt;p&gt;git rm &lt;filename&gt;    // 从版本库移除filename&lt;/filename&gt;&lt;/p&gt;
+
+&lt;p&gt;git commit -m “comment”  // 提交暂存区的内容到changeset，如果修改没有add/rm到暂存区，则提交不了修改&lt;/p&gt;
+
+&lt;p&gt;git log  // 查看历史提交,完整信息&lt;/p&gt;
+
+&lt;p&gt;git log –pretty=oneline  // 查看历史提交,单行显示&lt;/p&gt;
+
+&lt;p&gt;git log –graph   // 分支图形方式显示LOG&lt;/p&gt;
+
+&lt;p&gt;git log –abbrev-commit // 缩写方式显示LOG&lt;/p&gt;
+
+&lt;p&gt;git diff (&lt;filename&gt;)  // 查看未add/rm的修改内容&lt;/filename&gt;&lt;/p&gt;
+
+&lt;p&gt;git diff HEAD – readme.txt  // 查看已提交的修改内容&lt;/p&gt;
+
+&lt;p&gt;git diff &lt;source_branch&gt; &lt;target_branch&gt;  // 查看分支间差异&lt;/target_branch&gt;&lt;/source_branch&gt;&lt;/p&gt;
+
+&lt;p&gt;git status // 查看文件状态，新增/修改/删除，工作区/暂存区&lt;/p&gt;
+
+&lt;p&gt;git checkout – &lt;filename&gt;  // 撤销工作区修改，暂存区和已提交的不受影响&lt;/filename&gt;&lt;/p&gt;
+
+&lt;p&gt;git reset HEAD &lt;filename&gt; // unstage,暂存区撤销回工作区&lt;/filename&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;git reset –hard HEAD^&lt;/td&gt;
+      &lt;td&gt;&lt;commit&gt;  // 修改HEAD指针到新位置（等效于撤销已提交的修改，放弃commit id后的所有修改）&lt;/commit&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;HEAD代表当前指针，HEAD^前一个版本，HEAD^^往前第二个版本，HEAD~50往前50个版本&lt;/p&gt;
+
+&lt;p&gt;分支操作：&lt;/p&gt;
+
+&lt;p&gt;GIT管理系统里，每个分支对应一个指针指向当前分支的头部节点，HEAD通过指向分支指针从而指向某一分支的头部节点。&lt;/p&gt;
+
+&lt;p&gt;master分支是始终存在的。&lt;/p&gt;
+
+&lt;p&gt;如无特殊说明，merge分支优先使用fast-forward模式，如果不能FF,则用普通的merge&lt;/p&gt;
+
+&lt;p&gt;merge冲突时，Git用«««&amp;lt;，=======，»»»&amp;gt;标记出不同分支的内容，此时直接编辑文件，add 文件并commit&lt;/p&gt;
+
+&lt;p&gt;git branch  // 查看分支&lt;/p&gt;
+
+&lt;p&gt;git branch &lt;branch name=&quot;&quot;&gt;  //创建分支&lt;/branch&gt;&lt;/p&gt;
+
+&lt;p&gt;git branch -d &lt;branch_name&gt;  // 删除分支&lt;/branch_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git branch -D &lt;branch_name&gt; // 强制删除分支（一般当这个分支没有merge到其他分支而被丢弃时）&lt;/branch_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git checkout &lt;branch_name&gt; // 切换分支&lt;/branch_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git checkout -b &lt;branche_name&gt; // 创建分支并切换过去&lt;/branche_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git merge &lt;branch_name&gt; // 将branch_name merge到当前分支,包括合并文件，add文件+commit&lt;/branch_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git merge -m “comment” &lt;branch_name&gt;  // 为merge的commit添加注释&lt;/branch_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git merge –no-ff -m “comment” &lt;branch_name&gt; // 禁用ff模式&lt;/branch_name&gt;&lt;/p&gt;
+
+&lt;p&gt;工作区暂存：&lt;/p&gt;
+
+&lt;p&gt;git stash  // 当前分支的工作区内容暂存起来。此时git status是干净的&lt;/p&gt;
+
+&lt;p&gt;git stash list // 列出暂存区&lt;/p&gt;
+
+&lt;p&gt;git stash apply &lt;stashname&gt; // 恢复工作区&lt;/stashname&gt;&lt;/p&gt;
+
+&lt;p&gt;git stash drop &lt;stashname&gt; // 删除stash列表项&lt;/stashname&gt;&lt;/p&gt;
+
+&lt;p&gt;git stash pop  // 恢复stash顶端并删除&lt;/p&gt;
+
+&lt;p&gt;标签管理；&lt;/p&gt;
+
+&lt;p&gt;git tag // 查看标签&lt;/p&gt;
+
+&lt;p&gt;git tag &lt;tag_name&gt; // 在当前分支当前头打上标签&lt;/tag_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git tag &lt;tag_name&gt;  &lt;commit&gt;  // 在某个commit上打上标签&lt;/commit&gt;&lt;/tag_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git show &lt;tag_name&gt;  // 显示标签对应commit的内容&lt;/tag_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git tag -a &lt;tag_name&gt; -m &quot;blablabla...&quot;  //添加标签信息&lt;/tag_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git tag -d &lt;tag_name&gt;   // 删除本地标签&lt;/tag_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git push origin &lt;tag_name&gt;  // 推送本地标签&lt;/tag_name&gt;&lt;/p&gt;
+
+&lt;p&gt;git push origin –tags  // 推送本地所有标签&lt;/p&gt;
+
+&lt;p&gt;git push origin :refs/tags/&lt;tag_name&gt;  //删除远程标签&lt;/tag_name&gt;&lt;/p&gt;
+
+&lt;p&gt;远程协作：&lt;/p&gt;
+
+&lt;p&gt;几个基本概念：&lt;/p&gt;
+
+&lt;p&gt;远程引用：对远程仓库的引用，用一个名字标识，默认为origin.&lt;/p&gt;
+
+&lt;p&gt;远程分支：远端服务器上仓库里的分支。&lt;/p&gt;
+
+&lt;p&gt;远程跟踪分支：对远程分支状态的快照，用户不能自己修改，只有clone, fetch或者pull等同步到本地后变更，用于引用远程分支。名字为 remote/branch,例如origin/master&lt;/p&gt;
+
+&lt;p&gt;本地分支：本地仓库的分支。&lt;/p&gt;
+
+&lt;p&gt;跟踪分支：用于跟踪远程分支的本地分支，一般用于关联远程分支。&lt;/p&gt;
+
+&lt;p&gt;一般情况下，如果要远程协作，需要建立远程引用，关联本地跟踪分支到远程跟踪分支。&lt;/p&gt;
+
+&lt;p&gt;git clone时，自动创建远程引用，名字为origin；自动创建所有远程跟踪分支，包括origin/master；自动创建本地分支master并关联到origin/master上。git clone -o &lt;remote&gt;用于指定别的名字。因此，除了master外，其他分支需要自己手动创建跟踪分支。&lt;/remote&gt;&lt;/p&gt;
+
+&lt;p&gt;git pull 只在当前分支是关联到远程分支上才有效，是git fetch和git merge的封装，只在当前分支上有效。&lt;/p&gt;
+
+&lt;p&gt;git remote添加远程引用的情形，所有工作都要自己完成。&lt;/p&gt;
+
+&lt;p&gt;所有的分支都是指针，并不是某一个changeset链条的实体，因此某一个“分支”可以自由指向任意链条，或者跟踪远程分支。&lt;/p&gt;
+
+&lt;p&gt;可以远程引用多个仓库，仓库名不同，这样fetch到本地后，多个仓库的远程跟踪分支可以共存。自己推动也可以指定任意仓库来推送。分支只是指针，如果多个仓库的changeset有交集，那么本地只有一份changeset链条拷贝，多个仓库的同名分支指向不同的结点。&lt;/p&gt;
+
+&lt;p&gt;查看远程分支信息：&lt;/p&gt;
+
+&lt;p&gt;git remote // 查看本地已有的远程引用&lt;/p&gt;
+
+&lt;p&gt;git remote -v // 查看远程仓库的详细信息&lt;/p&gt;
+
+&lt;p&gt;git ls-remote (remote) // 查看remote上的远程引用&lt;/p&gt;
+
+&lt;p&gt;git remote show (remote) // 查看remote上的远程分支信息&lt;/p&gt;
+
+&lt;p&gt;本地仓库关联远程仓库（非clone）:&lt;/p&gt;
+
+&lt;p&gt;git remote add origin git@github.com:homer_simpson/repo_one.git   //  创建远程仓库名字，即表示创建本地仓库和远程仓库的连接。origin是约定俗成的远程仓库的名字&lt;/p&gt;
+
+&lt;p&gt;git fetch origin  // 获取远程仓库更新的changeset,并更新远程跟踪分支到新位置（可能和本地跟踪分支分叉）&lt;/p&gt;
+
+&lt;p&gt;git merge origin/master   // 将fetch下来的更新，merge到当前分支&lt;/p&gt;
+
+&lt;p&gt;本地新分支推送到远端（跟踪关系自动建立）：&lt;/p&gt;
+
+&lt;p&gt;git push origin serverfix // 推送本地分支更新，或本地新分支到仓库上&lt;/p&gt;
+
+&lt;p&gt;git push origin serverfix:serverfix // 等效于上一条命令&lt;/p&gt;
+
+&lt;p&gt;git push origin serverfix:awesomebranch // 推送本地分支到远程另一个名字的分支&lt;/p&gt;
+
+&lt;p&gt;对远端新分支建立本地跟踪分支：&lt;/p&gt;
+
+&lt;p&gt;git fetch origin  // 先获取远程新分支&lt;/p&gt;
+
+&lt;p&gt;git checkout -b serverfix origin/serverfix  // 建立serverfix分支为origin/serverfix的跟踪分支(指针指向origin/serverfix，以origin/serverfix为start point)&lt;/p&gt;
+
+&lt;p&gt;git checkout –track origin/serverfix  // 等效于上一条&lt;/p&gt;
+
+&lt;p&gt;git checkout -b sf origin/serverfix  // 用一个不同的本地跟踪分支名字&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;git branch -u&lt;/td&gt;
+      &lt;td&gt;–set-upstream origin/serverfix  // 将当前分支跟踪到远程分支(当前分支变为远程分支的跟踪分支，分支只是指针，因此可以跳跃到任何地点)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;拉取推送：&lt;/p&gt;
+
+&lt;p&gt;git pull  // git fetch + git merge,必须是跟踪分支&lt;/p&gt;
+
+&lt;p&gt;git push &lt;remote&gt;  &lt;branch&gt;  // 将branch的内容推送的remote,必须是个跟踪分支&lt;/branch&gt;&lt;/remote&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;git push -u origin master&lt;/td&gt;
+      &lt;td&gt;git push –set-upstream origin master  // 第一次push，先关联本地分支和远程分支&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;删除远程分支：&lt;/p&gt;
+
+&lt;p&gt;git push origin –delete serverfix&lt;/p&gt;
+
+&lt;p&gt;Git系统配置：&lt;/p&gt;
+
+&lt;p&gt;git config –global user.name “Your Name”  //设置名字&lt;/p&gt;
+
+&lt;p&gt;git config –global user.email “email@example.com”// 设置邮箱地址&lt;/p&gt;
+
+&lt;p&gt;git config –global color.ui true  // 显示不同的颜色&lt;/p&gt;
+
+&lt;p&gt;git config –global alias.st status  // 配置别名&lt;/p&gt;
+
+&lt;p&gt;可在根工作区创建.gitignore，配置GIT不跟踪的文件，但是可用命令git add -f &lt;file_name&gt;强行添加， git check-ignore -v &lt;file_name&gt;可以检查当前文件是否被过滤。&lt;/file_name&gt;&lt;/file_name&gt;&lt;/p&gt;
+
+&lt;p&gt;.git/config保存全局配置。&lt;/p&gt;</content><author><name></name></author><summary type="html">如果用过mercury(HG)，那么理解Git的运作方式就轻松多了。两者是相同的分布式版本管理工具，只是某些功能有着细微的差别 - Git的管理粒度更加细腻，因此操作上也比HG复杂一点。例如，修改文件并提交，hg会自动跟踪到，并不需要你去手动add，但是在git里，无论新增还是修改，都必须add相应的文件才可以commit.这样概念上可以保持一致性（计算机的美学）。</summary></entry><entry><title type="html">字节序转换与结构体位域值(bit field)的读取Part2-深入理解字节序和结构体位域存储方式</title><link href="radiolover.github.io/2017/08/30/%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F%E5%80%BC%E7%9A%84%E8%AF%BB%E5%8F%96Part2.html" rel="alternate" type="text/html" title="字节序转换与结构体位域值(bit field)的读取Part2-深入理解字节序和结构体位域存储方式" /><published>2017-08-30T22:11:37+08:00</published><updated>2017-08-30T22:11:37+08:00</updated><id>radiolover.github.io/2017/08/30/%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F%E5%80%BC%E7%9A%84%E8%AF%BB%E5%8F%96Part2</id><content type="html" xml:base="radiolover.github.io/2017/08/30/%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F%E5%80%BC%E7%9A%84%E8%AF%BB%E5%8F%96Part2.html">&lt;p&gt;上一篇文章讲解了带位域的结构体，在从大端机（Big Endian）传输到小端机(Little Endian)后如何解析位域值。下面继续深入详解字节序，以及位域存储的方式。&lt;/p&gt;
+
+&lt;p&gt;(1) 我们知道，存储数字时，对小端机而言，数字的低位，存在低地址，高位存在高地址。大端机正相反。&lt;/p&gt;
+
+&lt;p&gt;(2) 读取的方式，也是一样的。对于小端机，读出的低地址位作为数字的低位。&lt;/p&gt;
+
+&lt;p&gt;(3) 此外Big-Endian/Little-Endian存储顺序，不仅仅针对字节，还针对字节内的比特位。对于小端机而言，字节内的8个比特，低地址端比特位，对应二进制数字的低位。&lt;/p&gt;
+
+&lt;p&gt;(4) 对于结构体的多个位域，和普通成员一样，编译器同样按照地址由低到高顺序存储，无论是大端机还是小端机。只是位域内的比特顺序有区别罢了。&lt;/p&gt;
+
+&lt;p&gt;(5) 表述一个数值，可以使用两种视图 :&lt;/p&gt;
+
+&lt;p&gt;第一个是“逻辑视图”，通俗的表述方式，也就是我们平时在书本上看到的，手写数字时的方式。左边为高位，右边为低位。例如 375，-4.1，036，0xAF4D215B&lt;/p&gt;
+
+&lt;p&gt;另一个是“内存视图”，即数字在内存中的存储方式，是我们程序员专有的一种表述方式。左边为低地址字节，右边为高地址字节。字节内左边为低地址比特位，右边为高地址比特位。很明显，同一个unsigned int值,在大端机、小端机上，分别有两种不同的“内存视图”。&lt;/p&gt;
+
+&lt;p&gt;例如，uint16 0x2A1F，二进制比特位为0010 1010 0001 1111 （显然这一行使用的就是“逻辑视图”）&lt;/p&gt;
+
+&lt;p&gt;在小端机上的“内存视图”为：1111 1000 0101 0100 （低地址 -&amp;gt; 高地址）&lt;/p&gt;
+
+&lt;p&gt;在大端机上的“内存视图”为：0010 1010 0001 1111 （低地址 -&amp;gt; 高地址）&lt;/p&gt;
+
+&lt;p&gt;另外可以看到，大端机的”内存视图”和”逻辑视图”是相同的。在很多相关的文章里，并没有去区分数字的两种表述方式，导致了很多混淆。其次，很多例子使用16进制，只能用于表达字节序，无法精确表达内部的比特顺序。&lt;/p&gt;
+
+&lt;p&gt;再举一个上一节使用过的例子：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;Exam&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x3a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x4C1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;变量ex的6个位域的”内存视图”，在大端机是000100 010 0111010 10010110001 00000（低地址-&amp;gt;高地址），在小端机是001000 010 0101110 10001101001 00000（低地址-&amp;gt;高地址）。可见位域顺序是一样的，但是位域内比特位顺序不同。&lt;/p&gt;
+
+&lt;p&gt;若按照4位一组，大端机”内存视图”为 0001 0001 0011 1010 1001 0110 0010 0000，如果按照unsigned int的方式读取这块内存，结果是0x113A9620，四个比特位对应一个16进制数，和”逻辑视图”完全一样&lt;/p&gt;
+
+&lt;p&gt;在小端机上4位一组排列，”内存视图”为 0010 0001 0010 1110 1000 1101 0010 0000，如果按照unsigned int的方式读取这块内存，就会按照小端机的方式来解析内存。可以先把二进制翻译为”逻辑视图” - 把整个”内存视图”32位颠倒顺序，结果是0x04B17484，注意不是0x212E8D20.&lt;/p&gt;
+
+&lt;p&gt;那么这些规则，对位域值的读取有什么影响呢？&lt;/p&gt;
+
+&lt;p&gt;字节流在网络上传输是按照网络字节序传输的，也就是大端序。网卡不知道数据的含义(到底是int还是double,还是什么image)，只能看到一个个字节，因此它做的就是把每个字节的8个比特位转换为本机的位序。而具体的内容，则由我们的程序处理。比如对于整形等，调用socket接口的ntohl(),htonl()…等函数转换字节序。顺便提一句，对于float/double类型，可以直接memcpy到一个整形里面，之后按照整形正常的处理流程，到了目标机后，再memcpy到一个float/double里。&lt;/p&gt;
+
+&lt;p&gt;char,short,int,long等2次幂大小的整形，作为一个单独的整体，经过整个流程梳理是没有任何问题的。但无法保证结构体内的多个位域，按照定义的先后顺序，从低地址到高地址排列。这意味着，无论如何，直接在代码中使用ex.tag的方式，是读不出tag位域的数据的。&lt;/p&gt;
+
+&lt;p&gt;细分有如下几种情况：
+(1) 主机内部传输无任何影响，毕竟是一样的CPU架构。&lt;/p&gt;
+
+&lt;p&gt;(2) 相同字节序的主机间传输，同样没有影响。因为经过二次socket+网卡转换后，码流是相同的。读者可自行验证。&lt;/p&gt;
+
+&lt;p&gt;(3) 大端机传输到小端机（上一节所描述的）。下列二进制值如没有特殊说明，都是”内存视图”。&lt;/p&gt;
+
+&lt;p&gt;还以上面的位域为例，在大端机的为000100 010 0111010 10010110001 00000（低地址-&amp;gt;高地址），按照四比特一组为： 0001 0001  0011 1010  1001 0110  0010 0000&lt;/p&gt;
+
+&lt;p&gt;传输到网络中，由于大端序和网络序相同，所以网卡不做转换，字节流按照先后，依然是 0001 0001  0011 1010  1001 0110  0010 0000&lt;/p&gt;
+
+&lt;p&gt;传输到小端机，网卡自动转换每个字节的比特序，但字节顺序维持原状， 1000 1000 0101 1100 0110 1001 0000 0100，可见原先跨字节相连的位域被”打散了”。字节内的位域，虽然比特顺序对了，但是从低比特位挪到了高比特位，位置错了。&lt;/p&gt;
+
+&lt;p&gt;调用ntohl,比特序不变，转换字节序，0000 0100 0110 1001 0101 1100 1000 1000，效果是跨字节位域再次连通了。位域内存地址顺序，正好和原先相反。如果把大端机的内存视图画到一张纸上，相当于翻到纸的背面。&lt;/p&gt;
+
+&lt;p&gt;此时，将这4个字节码流当作unsigned int，得到一个”无符号整形”，其”逻辑视图”等于大端机上的“内存视图”。左边恰好是结构体最开始的位域：0001 0001  0011 1010  1001 0110  0010 0000。因此我们将错就错，直接使用位操作符来左移相应的位数（需要计算后边所有位域的总比特数），即可得到对应的位域值。位移操作符等，都是对”逻辑视图”操作的。&lt;/p&gt;
+
+&lt;p&gt;(4) 小端机传到大端机。网卡转换+ntohl转换后，依然在内存中得到一个位域顺序和正常顺序相反的”无符号整形”。只是这次使用位运算符要注意，第一个位域在”逻辑视图”的最右边，依次向左类推，和(3)的情形是相反的。&lt;/p&gt;</content><author><name></name></author><summary type="html">上一篇文章讲解了带位域的结构体，在从大端机（Big Endian）传输到小端机(Little Endian)后如何解析位域值。下面继续深入详解字节序，以及位域存储的方式。</summary></entry><entry><title type="html">python中的“引用”和C++的引用</title><link href="radiolover.github.io/2016/06/27/python%E4%B8%AD%E7%9A%84-%E5%BC%95%E7%94%A8-%E5%92%8CC-%E7%9A%84%E5%BC%95%E7%94%A8.html" rel="alternate" type="text/html" title="python中的“引用”和C++的引用" /><published>2016-06-27T02:48:18+08:00</published><updated>2016-06-27T02:48:18+08:00</updated><id>radiolover.github.io/2016/06/27/python%E4%B8%AD%E7%9A%84%E2%80%9C%E5%BC%95%E7%94%A8%E2%80%9D%E5%92%8CC-%E7%9A%84%E5%BC%95%E7%94%A8</id><content type="html" xml:base="radiolover.github.io/2016/06/27/python%E4%B8%AD%E7%9A%84-%E5%BC%95%E7%94%A8-%E5%92%8CC-%E7%9A%84%E5%BC%95%E7%94%A8.html">&lt;p&gt;python并不刻意区分“按值传递”和“按引用传递”。&lt;/p&gt;
+
+&lt;p&gt;在底层，python将值分为不可变对象(比如int,str)和可变对象(比如列表)。所有的变量都是对某个对象的引用，赋值（=）和函数参数传递，都将改变变量所引用的对象。&lt;/p&gt;
+
+&lt;p&gt;对于不可变对象，赋值和传参将导致新创建对象，这和C++的引用行为是不同的。此时，赋值和传参是按值传递。&lt;/p&gt;
+
+&lt;p&gt;对于可变对象，赋值和传参，和C++引用的行为一致，是真正的按引用传递。&lt;/p&gt;</content><author><name></name></author><summary type="html">python并不刻意区分“按值传递”和“按引用传递”。</summary></entry><entry><title type="html">字节序转换与结构体位域（bit field）值的读取</title><link href="radiolover.github.io/2016/05/29/%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F%E5%80%BC%E7%9A%84%E8%AF%BB%E5%8F%96.html" rel="alternate" type="text/html" title="字节序转换与结构体位域（bit field）值的读取" /><published>2016-05-29T16:35:37+08:00</published><updated>2016-05-29T16:35:37+08:00</updated><id>radiolover.github.io/2016/05/29/%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F%E5%80%BC%E7%9A%84%E8%AF%BB%E5%8F%96</id><content type="html" xml:base="radiolover.github.io/2016/05/29/%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F%E5%80%BC%E7%9A%84%E8%AF%BB%E5%8F%96.html">&lt;p&gt;最近又遇到了几年前遇到的问题，标记一下。&lt;/p&gt;
+
+&lt;p&gt;对于跨字节位域(bit field)而言，如果数据传输前后环境的字节序不同（LE-&amp;gt;BE,BE-&amp;gt;LE），简单地调用(ntohs/ntohl/htons/htonl)并不能正确读取位域的值。&lt;/p&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;其中，tag,field2,pad是字节内位域，field1和field3是跨字节位域。当这个结构体从某个大端序平台（例如MIPS,big-endian）通过网络传送到PC机（little-endian），在pc机上无论调用ntohl与否，直接通过Exam.field3语句都无法获取正确的值。&lt;/p&gt;
+
+&lt;p&gt;解决方案：&lt;/p&gt;
+
+&lt;p&gt;(1)调用ntohl，并保存该变量为一个unsigned int。&lt;/p&gt;
+
+&lt;p&gt;此时Exam的5个成员将暂时按照地址从高到低的顺序排列（正确的情况下，无论BE还是LE，结构体内部的成员都应当按照先后顺序，从低地址到高地址排列）。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;memcpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ntohl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;(2)使用位运算符获取位域正确值。&lt;/p&gt;
+
+&lt;p&gt;经过上一步骤，虽然Exam的成员(将temp内的码流当作Exam)在内存中的排列顺序是错的，但我们将错就错。从日常印刷书写的“逻辑视图”角度看，Exam.tag在“最左端”(高位)，Exam.pad在“最右端”（低位），且5个位域内的比特顺序也是正确的。因此可以直接用移位运算符获取其中的值。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 高位全部为0，不必使用位与运算
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00000007&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 只获取移位操作结果的低3位。
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x0000007F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x000007FF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x0000001F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><summary type="html">最近又遇到了几年前遇到的问题，标记一下。</summary></entry><entry><title type="html">时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？</title><link href="radiolover.github.io/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92-%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88.html" rel="alternate" type="text/html" title="时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？" /><published>2015-03-15T13:35:37+08:00</published><updated>2015-03-15T13:35:37+08:00</updated><id>radiolover.github.io/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92:%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88</id><content type="html" xml:base="radiolover.github.io/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92-%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88.html">&lt;p&gt;去年互联网地图行业开始引入众包模式，国内比较大的地图商，比如四维图新、高德地图、百度地图纷纷开始推出UGC应用，众包给用户采集门址、公交站等信息，并按照工作量给与采集者一定的回报。我曾经玩过某德推出的“道路寻宝”APP，应用内部集成了道路拍拍、门址采集、公交拍拍、POI任务等。该应用有如下限制：（1）为了防止作弊，采集者必须打开GPS，才能拍摄门牌号。（2）为了保证图片清晰，采集工作只能在日出后半小时至日落前半小时内进行。问题在于，应用仅仅读取手机的时间进行日出日落时间判断。有一次晚上参加用户线上会议，一位远在新疆的采集者抱怨，往往烈日当头采集就被强制结束。PS:其实还有一个BUG他没有发现：太阳升起之前，采集就已经放开了；而且如果你是位于东北三省东部的用户，在日落后依然可以采集~&lt;/p&gt;
+
+&lt;p&gt;那么问题到底出在什么地方？先从时区谈起。&lt;/p&gt;
+
+&lt;h3 id=&quot;理论时区&quot;&gt;理论时区&lt;/h3&gt;
+
+&lt;p&gt;众所周知，由于时差问题，世界各地的日出日时刻是不同的。然而，每个国家或地区，都喜欢把日出时刻定在5-7点左右，把日落时刻定在17-19点左右。这样一来，使用全球统一的格林威治标准时间，就只能停留在专业领域，而在民用领域，大家各自为政，使用适合自己的时间。这就产生了时区。以穿越英国伦敦格林威治的本初子午线为基准，向东向西分别设置了12个时区，每个时区的“时间”数值相差一个小时。&lt;/p&gt;
+
+&lt;p&gt;理论时区以被15整除的子午线为中心，向东西两侧延伸7.5度，即每15°划分一个时区，这是理论时区。理论时区的时间采用其中央经线（或标准经线）的地方时。所以每差一个时区，区时相差一个小时，相差多少个时区，就相差多少个小时。东边的时区时间比西边的时区时间来得早。格林威治的0度经线，向东西各延伸7.5度，构成的15度范围组成的时区就是UTC±0，0时区所采用的时间就是格林威治时间，该时间也被采用为国际标准时间度量。东经7.5-22.5度为东一区，以此类推，西半球也采取相同的类推方式。东十二区和西十二区是重合的(172.5E - 172.5W)，国际日期变更线(180E/W)从中间穿越。从东向西穿越，日期加1天，西向东穿越，日期减1天。&lt;/p&gt;
+
+&lt;h3 id=&quot;法定时区&quot;&gt;法定时区&lt;/h3&gt;
+
+&lt;p&gt;但是，国界线可不像经线、纬线那样平直。为了避开国界线，有的时区的形状并不规则，而且比较大的国家以国家内部行政分界线为时区界线，这是实际时区，即法定时区。于是，理论时区匀称、完美的划分，就变成了这样：（图片来自维基百科）
+&lt;img src=&quot;radiolover.github.io/assets/img/timezone.png&quot; alt=&quot;time zone&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从图中可以看到，中国横跨了5个理论时区（从东五区 - 东九区），但是全部归在了法定时区UTC+8。美国的法定时区则尽量趋近于理论时区，因此就有了美东、美西、太平洋..等时间的区别。为了充分利用阳光，有的地区夏季会采用夏时制。我国曾采用了6年夏时制，但是由于我国将多个理论时区统一为东八区，因此新疆等天亮的较晚的地区并不能起到节约能源的作用，加上我国民众科学素养普遍不高，导致了更多的混乱，因此草草收场。&lt;/p&gt;
+
+&lt;h3 id=&quot;北京时间&quot;&gt;北京时间&lt;/h3&gt;
+
+&lt;p&gt;某一国采用哪一个法定时区，一般取决于首都所在的理论时区。北京位于东八区，因此采用东八区中心经线（120E）所在位置的地方平太阳时（&lt;strong&gt;&lt;em&gt;理论时间&lt;/em&gt;&lt;/strong&gt;）作为&lt;strong&gt;&lt;em&gt;法定时间&lt;/em&gt;&lt;/strong&gt;，而不是北京的地方平太阳时（北京大致位于116E,40N附近）。上海位于120E,31N，几乎挨着东八时区的中央经线。&lt;/p&gt;
+
+&lt;p&gt;移动设备、计算机的时间是如何校准的？&lt;/p&gt;
+
+&lt;p&gt;众所周知，目前全球有为数众多的互联网授时服务，例如美国海军天文台授时中心，我国有中国科学院国家授时中心。这些授时服务提供的数据格式多种多样，比如从1970年1月1日到现在多少秒的整数。但这些授时中心采用的时间基准是GMT，即格林威治国际标准时间。我们电脑全新安装系统，或者手机、平板第一次启用，一般会有区域设置：“UTC+8，北京、香港、台北、新加坡”。设置完毕后，设备就可以换算出当地时间。&lt;/p&gt;
+
+&lt;h3 id=&quot;gps时间&quot;&gt;GPS时间&lt;/h3&gt;
+
+&lt;p&gt;到这里相信很多人也都明白了。GPS模块（以Android手机为例，调用location.getTime()）获取的时间，是基于理论时区进行计算的&lt;strong&gt;&lt;em&gt;当地理论时间&lt;/em&gt;&lt;/strong&gt;。GPS卫星会广播当前的世界标准时间，然后根据经纬度算出所在理论时区，即可在线性时间内算出理论时区的当地时间。比如你人在新疆喀什，位于理论东五区，此时北京时间是上午10点，那么你的手机时间也是10点，但是GPS获取的时间则是7点（东八区 - 东五区 = 3小时时差）。&lt;/p&gt;
+
+&lt;h3 id=&quot;仅通过经纬度能否获取当地法定时间&quot;&gt;仅通过经纬度能否获取当地法定时间？&lt;/h3&gt;
+
+&lt;p&gt;理论上可行。但是实际上非常困难：由于国界线的不规则性，要存储地球上某一点（假设是10米 * 10米面积的粒度）所在的国家或法定时区，数据量是非常庞大的，实际意义并不大。因此当前的解决方案，都是要求用户自己手动设置区域选项（而且大多是在初始化向导中强制设置）。夏时制的映射规则则要简单多了，因此一般都会有设备自行判断。&lt;/p&gt;
+
+&lt;h3 id=&quot;道路寻宝bug的解决方案&quot;&gt;“道路寻宝”BUG的解决方案&lt;/h3&gt;
+
+&lt;p&gt;第一，将当前时间获取方式改为通过GPS获取，就可以进行真正的日出日落判断。如果以时区为粒度，一般在理论上取早晨6点日出，18点日落，并在夏至、冬至前后进行适当调整。&lt;/p&gt;
+
+&lt;p&gt;第二，有些Android手机厂商开发的driver实在是太烂了，通过getTime可能获取不到当地理论时间，那么只有通过GPS读取的经度进行代码switch-case条件判断了：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;67.5E-82.5&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;（理论东五区）&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;使用当地理论时间即“手机时间（北京时间）&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;小时”判断&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;82.5E-97.5&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;（理论东六区）&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;使用当地理论时间即“手机时间（北京时间）&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;小时”判断；&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.....&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;；&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;127.5E-142.5&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;（理论东九区）&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;使用当地理论时间即“手机时间（北京时间）&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;小时”判断；&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// 黑龙江佳木斯市抚远县黑瞎子岛差不多就在134E，这里是中国最东端
+&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;更好的做法，就是在按照上述方式获得当地理论时间后，还要直接通过GPS经纬度，计算该点的日出日落时刻。因为该方式是精确到点的，因此计算的日出日落时刻和实际的日出日落时刻的误差只有几秒。而采用“6点日出18点日落”，误差有时会很大。这需要复杂的科学计算，用代码库可以实现。&lt;/p&gt;
+
+&lt;h3 id=&quot;更多&quot;&gt;更多&lt;/h3&gt;
+
+&lt;p&gt;上述三条解决方案，保证了当地理论时间如何正确获取。还有一个问题，就是如何计算日出日落时刻，而简单采用“6点日出18点日落”也仅适用于春分、秋分前后，在冬至、夏至需要进行适当调整和近态拟合，否则计算日出日落时刻和实际日出日落时刻的误差会达到一个小时以上。&lt;/p&gt;
+
+&lt;p&gt;实际上，影响一个地方日出日落时刻的因素有很多，日期，纬度，海拔高度都需要考虑。要理解这些，需要专业的地理知识和科学计算，写起来又是长篇大论，所以此处略去一万字。大致规律是：越靠近赤道，日出/日落时刻越趋近于6点/18点；在任何地点，越接近一年当中的春分、秋分，日出/日落时刻同样越趋近于6点/18点；在北半球的夏季，越靠北，日出越早日落越晚，直到出现极昼现象。如果你的业务开展到俄罗斯北部，北极圈以内，那么请忘记日出日落吧~北半球冬季则正相反。南半球在季节上也与北半球相反。&lt;/p&gt;
+
+&lt;p&gt;地图应用背后的原理远不止这些。天朝特有的坐标扭曲和偏移也是一大问题，同国际标准的WGS84坐标系相比，国内地图商要交费使用保密的转换插件。&lt;/p&gt;</content><author><name></name></author><summary type="html">去年互联网地图行业开始引入众包模式，国内比较大的地图商，比如四维图新、高德地图、百度地图纷纷开始推出UGC应用，众包给用户采集门址、公交站等信息，并按照工作量给与采集者一定的回报。我曾经玩过某德推出的“道路寻宝”APP，应用内部集成了道路拍拍、门址采集、公交拍拍、POI任务等。该应用有如下限制：（1）为了防止作弊，采集者必须打开GPS，才能拍摄门牌号。（2）为了保证图片清晰，采集工作只能在日出后半小时至日落前半小时内进行。问题在于，应用仅仅读取手机的时间进行日出日落时间判断。有一次晚上参加用户线上会议，一位远在新疆的采集者抱怨，往往烈日当头采集就被强制结束。PS:其实还有一个BUG他没有发现：太阳升起之前，采集就已经放开了；而且如果你是位于东北三省东部的用户，在日落后依然可以采集~</summary></entry><entry><title type="html">手机定位原理 - GPS/GLONASS/北斗 + WIFI + 基站</title><link href="radiolover.github.io/2015/03/01/%E6%89%8B%E6%9C%BA%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86.html" rel="alternate" type="text/html" title="手机定位原理 - GPS/GLONASS/北斗 + WIFI + 基站" /><published>2015-03-01T19:11:37+08:00</published><updated>2015-03-01T19:11:37+08:00</updated><id>radiolover.github.io/2015/03/01/%E6%89%8B%E6%9C%BA%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86</id><content type="html" xml:base="radiolover.github.io/2015/03/01/%E6%89%8B%E6%9C%BA%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86.html">&lt;h3 id=&quot;卫星定位系统---gpsglonass北斗&quot;&gt;卫星定位系统 - GPS/GLONASS/北斗：&lt;/h3&gt;
+
+&lt;p&gt;关于GPS、GLONASS、北斗、伽利略系统的科普请自行谷歌。&lt;/p&gt;
+
+&lt;p&gt;GPS是使用最广泛的全球定位网络，几乎是所有智能手机的标配。进几年，俄罗斯的GLONASS定位功能也逐步加入智能手机芯片，与GPS组成双定位系统，定位速度大幅提升。中国自主研发的北斗导航系统，也开始出现在部分高端机型。至于欧洲的伽利略系统，目前还没有见到有哪部手机支持。&lt;/p&gt;
+
+&lt;p&gt;卫星定位系统的优点在于精度高，误差一般在15米以内。GPS芯片会接收天空中多颗卫星的同步信号，然后根据信号的相位差，计算出具体的经纬度。保持多颗卫星信号同步，将误差控制在纳秒级以下，是GPS核心技术之一。&lt;/p&gt;
+
+&lt;p&gt;下图是Android平台的著名GPS应用GPSTestPlus截图，可以看到本机支持GPS和GLONASS双定位系统（圆点为GPS卫星，三角形为GLONASS卫星），以及定位卫星在天球上的投影。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;radiolover.github.io/assets/img/gps01.png&quot; alt=&quot;gps1&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;wifi定位&quot;&gt;WIFI定位：&lt;/h3&gt;
+
+&lt;p&gt;路由器默认都会进行SSID广播（除非用户手动配置关闭该功能），在广播帧包含了该路由器的MAC地址。此时需要采集装置进行MAC信息采集和信号强度信息采集，并上传到服务器，经过服务器的计算，保存为“MAC-经纬度”的映射。例如谷歌的街景采集车，曾经因隐私问题在德国被定性为非法。在国内，通过用户智能手机应用的后门功能采集，则是数据公司获取“MAC-经纬度”映射信息的主要途径。一般情况下，用户周边会有多个WIFI信号源，此时手机会默默地解析出所有WIFI的MAC地址，如果某些WIFI的信息在数据库中已经存在，则可以根据信号强度，推导出未知WIFI的经纬度。如果没有已知WIFI，而手机碰巧开着GPS，则也能完成数据采集。用户在不知情的情况下为地图公司搜集了所有的数据。可以想象，这样的数据量是非常庞大的。&lt;/p&gt;
+
+&lt;h3 id=&quot;基站定位&quot;&gt;基站定位：&lt;/h3&gt;
+
+&lt;p&gt;基站数量远少于WIFI，且基站都有公开的位置数据，因此采集工作相对简单。&lt;/p&gt;
+
+&lt;h3 id=&quot;多种定位途径的精确度&quot;&gt;多种定位途径的精确度：&lt;/h3&gt;
+
+&lt;p&gt;卫星定位系统  &amp;gt; WIFI  &amp;gt; 基站（蜂窝网络）。因此优先级也是卫星定位系统最高。&lt;/p&gt;
+
+&lt;p&gt;以Android设备为例，如果用户未关闭GPS功能，则优先使用GPS，从GPS模块读取时钟校准、经纬度等数据。如果同时还开着WIFI和基站，则会同时采用WIFI和基站辅助定位，减少GPS芯片的计算步骤，提高定位速度，这就是A-GPS。&lt;/p&gt;
+
+&lt;p&gt;如果关闭GPS，而WIFI模块保持开启，手机会读取周边所有WIFI信号的MAC地址和信号强度，并上传至某公司（通常是地图供应商）的服务器，服务器查询并计算后会返回经纬度。WIFI的覆盖范围一般只在50米内，因此定位精度非常接近卫星定位系统。&lt;/p&gt;
+
+&lt;p&gt;如果WIFI模块也关闭了，那么只有通过基站（蜂窝网络）了。此时手机会接收到基站的小区ID，上传至服务器查询，服务器同样返回经纬度。但此时精度较差，误差一般在100以上，毕竟基站的覆盖范围也是很大的，仅凭信号强度是难以计算出精确位置的。&lt;/p&gt;
+
+&lt;p&gt;需要注意的是，WIFI方式和基站方式，都需要联网，要不你怎么和服务器联系？但是WIFI模块打开后，即可进行WIFI扫描和信息采集，不必连接到某一AP上，基站也是一样，不必打开蜂窝网络。因为向服务器发起查询请求，既可走蜂窝数据流量，也可走WIFI流量。
+&lt;img src=&quot;radiolover.github.io/assets/img/gps02.png&quot; alt=&quot;gps2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;radiolover.github.io/assets/img/gps03.png&quot; alt=&quot;gps3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;radiolover.github.io/assets/img/gps04.png&quot; alt=&quot;gps4&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">卫星定位系统 - GPS/GLONASS/北斗：</summary></entry><entry><title type="html">架构设计中常见的语义耦合类型的总结</title><link href="radiolover.github.io/2014/10/22/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E4%B9%89%E8%80%A6%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%80%BB%E7%BB%93.html" rel="alternate" type="text/html" title="架构设计中常见的语义耦合类型的总结" /><published>2014-10-22T19:42:37+08:00</published><updated>2014-10-22T19:42:37+08:00</updated><id>radiolover.github.io/2014/10/22/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E4%B9%89%E8%80%A6%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%80%BB%E7%BB%93</id><content type="html" xml:base="radiolover.github.io/2014/10/22/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E4%B9%89%E8%80%A6%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%80%BB%E7%BB%93.html">&lt;p&gt;语义耦合是隐性的，不易察觉的耦合类型 ，是导致代码重构、调试、修改复杂度急剧增加的主要原因。&lt;/p&gt;
+
+&lt;p&gt;1，操作顺序耦合&lt;/p&gt;
+
+&lt;p&gt;使用一个对象，需要先调用Init()，之后才能调用DoAnything()。这种顺序耦合，即使在文档中remark也是极为不优雅的做法。&lt;/p&gt;
+
+&lt;p&gt;2，全局参数传递&lt;/p&gt;
+
+&lt;p&gt;模块A修改了某个全局参数g_val，模块B读取该值。模块B必须知道模块A已经对该参数赋值。&lt;/p&gt;
+
+&lt;p&gt;3，业务封装不够紧密&lt;/p&gt;
+
+&lt;p&gt;模块A向模块B传一个参数，模块B根据该参数选择对应的操作。模块A必须知道与业务相关的所有的操作类型。对于模块A，仅传递模块A自身可以理解的语义，或者通俗的概念作为参数，而不是被封装的业务相关的参数。&lt;/p&gt;
+
+&lt;p&gt;4，超越接口的数据类型约定&lt;/p&gt;
+
+&lt;p&gt;模块A向模块B传递一个接口的指针，模块B将其强制转换为派生类的指针。当模块B知道该接口的实际类型时，封装已经被破坏了。非相关模块只能对接口操作，而不应对接口之外的职责进行约定。&lt;/p&gt;
+
+&lt;p&gt;先写这么多，欢迎补充。&lt;/p&gt;</content><author><name></name></author><summary type="html">语义耦合是隐性的，不易察觉的耦合类型 ，是导致代码重构、调试、修改复杂度急剧增加的主要原因。</summary></entry><entry><title type="html">C++语言体系设计哲学的一些随想(未完待续)</title><link href="radiolover.github.io/2014/09/07/C-%E8%AF%AD%E8%A8%80%E4%BD%93%E7%B3%BB%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9A%8F%E6%83%B3-%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD.html" rel="alternate" type="text/html" title="C++语言体系设计哲学的一些随想(未完待续)" /><published>2014-09-07T19:50:30+08:00</published><updated>2014-09-07T19:50:30+08:00</updated><id>radiolover.github.io/2014/09/07/C-%E8%AF%AD%E8%A8%80%E4%BD%93%E7%B3%BB%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9A%8F%E6%83%B3-%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD</id><content type="html" xml:base="radiolover.github.io/2014/09/07/C-%E8%AF%AD%E8%A8%80%E4%BD%93%E7%B3%BB%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9A%8F%E6%83%B3-%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD.html">&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;对于静态类型语言，其本质目标在于恰当地操作数据，得到期望的值。具体而言，需要：&lt;/p&gt;
+
+&lt;p&gt;(1) 定义数据类型&lt;/p&gt;
+
+&lt;p&gt;你定义的数据是什么，是整形还是浮点还是字符。该类型的数据可以包含的值的范围是什么。&lt;/p&gt;
+
+&lt;p&gt;(2) 定义操作的含义&lt;/p&gt;
+
+&lt;p&gt;操作是严格数据类型相关的。操作表明了对了一个具有特定类型的数据，执行操作后产生什么样结果。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;C++就是一个典型的静态类型语言。在C++中，无论是”数据类型”还是”操作”，都分为内置的和自定义的。&lt;/p&gt;
+
+&lt;p&gt;C++的内置数据类型包括：&lt;/p&gt;
+
+&lt;p&gt;（1）基本内置类型&lt;/p&gt;
+
+&lt;p&gt;整形、浮点、布尔、字符….&lt;/p&gt;
+
+&lt;p&gt;（2）STL库定义的类型&lt;/p&gt;
+
+&lt;p&gt;例如常用的iostream、string、迭代器……&lt;/p&gt;
+
+&lt;p&gt;此外C++和定义了复合类型机制，包括所有类型的引用、指针、数组，他们可以作为一个完整数据类型的一部分。&lt;/p&gt;
+
+&lt;p&gt;顺便提一下，顶层/底层const、static、volatile…等修饰符，定义了数据的其他属性，这些属性也可以是一个完整数据类型的组成部分。&lt;/p&gt;
+
+&lt;p&gt;而自定义类型，最常用的就是class、struct、union定义，还有函数签名，当然也可以使用复合类型机制定义自己类的引用、指针、数组等。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;重点在于，无论是变量还是常量，必须属于某一特定的数据类型。因为操作只有基于精确的数据类型，其定义才有了确定的含义（在编译原理中叫做“语义”）。也就是说，在一个确定的操作集合中(例如C++语言内置的所有操作)，只要给一个变量赋于了数据类型，这个变量可以执行的操作也就确定了。定义变量nVal为int类型，那么nVal就可以参与加减乘除、关系运算、拷贝、转换为double、传递给函数形参、作为数组的下标………&lt;/p&gt;
+
+&lt;p&gt;C++的“操作”，其含义非常广泛。其实C++语言已经通过成员函数、操作符重载、函数重载、构造函数定义的隐式类型转换…等机制，表明了 C++作为一个静态类型语言的本质：属于特定类型的数据，加上其上的操作。可以这样理解，任何一个操作，本质就是函数，操作符在C++语言内部也是被当作函数来看待的（这也能解释C++提供operator操作符重载机制的动机）；类的成员函数、友元函数，也是对类本身这个“数据类型”的操作。&lt;/p&gt;
+
+&lt;p&gt;更进一步，操作本身也是一种特殊的数据类型。可以定义函数的指针、函数的数组，成员访问（-&amp;gt;&lt;em&gt;,.&lt;/em&gt;），只是可以被当作数据类型来使用的机会不多，也被语言本身限制了。&lt;/p&gt;
+
+&lt;p&gt;C++的内置操作不太好理解，实际上我们常用的语言机制都是“操作”，具体包含了：&lt;/p&gt;
+
+&lt;p&gt;（1）各种各样的操作符&lt;/p&gt;
+
+&lt;p&gt;算术操作符、关系操作符、位运算、取地址、单目运算、解引用、数组元素访问…..&lt;/p&gt;
+
+&lt;p&gt;（2）拷贝操作&lt;/p&gt;
+
+&lt;p&gt;拷贝初始化、列表初始化（C++ 11）、赋值运算、函数传参、函数返回值、类型转换执行的临时变量拷贝……等其他非引用场景&lt;/p&gt;
+
+&lt;p&gt;（3）数据类型转换&lt;/p&gt;
+
+&lt;p&gt;类型转换也是一种操作。对于普通的操作，执行前需先匹配要操作的数据的类型。现实中，不可能总能保证在代码里提供类型严格匹配的数据，因此类型转换也是C++语言非常普遍的操作。&lt;/p&gt;
+
+&lt;p&gt;该如何理解这样的操作呢？举个例子，例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C++&quot;&gt;int nVal = 42;
+ 
+double fVal = 3.14;
+ 
+double fValTwo;
+ 
+fValTwo = fVal + nVal ; // nVal类型提升为double
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上述代码最后一行的相加操作将执行类型提升。从编译器的角度看，此时将生成一个匿名的变量，变量的类新和需要匹配的类型(double)相同，之后执行int至double的类型转换操作，操作结果保存在这个匿名变量中。之后才会执行“+”操作。也就是说，如果选定了操作，那么就会期待若干数据类型完全匹配的操作数，为了满足这个条件，系统会执行类型转换。&lt;/p&gt;
+
+&lt;p&gt;对于赋值操作，该操作会期待=右边操作数的数据类型和左边完全匹配，此时也会和上述相同，生成匿名变量，执行类型转换。准备工作完成后，再执行”=”操作。&lt;/p&gt;
+
+&lt;p&gt;函数的调用也是基于相同的原理，即实参类型和形参类型的匹配。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;C++语言内部定义了异常复杂的类型转换规则（操作），只不过大多数对使用者是透明的。例如：&lt;/p&gt;
+
+&lt;p&gt;整形提升 - char、short、bool会先转换为int；&lt;/p&gt;
+
+&lt;p&gt;类型提升 - 防止精度损失；&lt;/p&gt;
+
+&lt;p&gt;类型降低 -有精度损失，常见于拷贝操作。拷贝操作是将源对象严格匹配目标对象，因此不会有算术操作里的“整形提升”。拷贝包括了拷贝初始化、赋值运算、函数调用实参赋给形参&lt;/p&gt;
+
+&lt;p&gt;非bool值都可以转换为bool，相反则转换为0/1；&lt;/p&gt;
+
+&lt;p&gt;任意类新指针都可转换为void*；&lt;/p&gt;
+
+&lt;p&gt;数组在不用于decltype、sizeof、typeid、取地址&amp;amp;的情况下，会自动转换为指向第一个元素的指针。&lt;/p&gt;
+
+&lt;p&gt;非底层const向底层const的转换 - 指向常量的引用和指针可以绑定到非常量上，和内置类型的提升与降低不同，底层const向非底层const的转换是非法的；&lt;/p&gt;
+
+&lt;p&gt;子类向基类的转换 - 基类指针/引用可以指向子类，这是多态的基础。和底层const一样，相反的转换是非法的。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;-&lt;/p&gt;
+
+&lt;p&gt;PS:关于底层const和继承体系类型转换的单向性：&lt;/p&gt;
+
+&lt;p&gt;本质而言，一个数据的数据类型，可以执行的操作的集合越小，该数据可以引用/绑定的对象类型越广。例如：&lt;/p&gt;
+
+&lt;p&gt;数据类型A，可以执行operA - operZ 共26个操作。数据类新B，可以执行的操作是A的子集，比如operH-operN。那么，B的引用/指针可以绑定到A（B的引用/指针可以接受A/A的指针赋值），相反则是非法的。&lt;/p&gt;
+
+&lt;p&gt;const int &lt;em&gt;不能修改指向的int，而int *可以，也就是说，数据类型const int *的操作范围比int *要小，所以const int *可以绑定到int&lt;/em&gt;指向的对象（本质上是指const int &lt;em&gt;可以接受int&lt;/em&gt;赋值）。
+在继承体系中，基类的操作范围肯定是小于子类的，所以 基类指针指向/基类引用 子类的合法的。&lt;/p&gt;
+
+&lt;p&gt;造成这一切的原因就在于，对静态类型语言，编译器始终“固执”地、“自以为是”地按照其静态声明类型，来决定一个操作是否合法，而不去管这个对象实际指向的类型。可以想象，编译器“自以为是”地认为通过int &lt;em&gt;可以改变这个int，而不管这个int&lt;/em&gt;实际指向的是const int，如果允许底层const向非底层const转换，就会带来冲突。&lt;/p&gt;
+
+&lt;p&gt;-&lt;/p&gt;
+
+&lt;p&gt;PS:基于该观点理解重载&lt;/p&gt;
+
+&lt;p&gt;函数重载、操作符重载的本质，是用同一个名字定义了多个操作。结果是在编译阶段引入了一个确定具体操作的过程 - 从候选操作中选出最匹配的操作。而上述“类型转换”操作则是在运行阶段进行的。&lt;/p&gt;
+
+&lt;p&gt;自定义操作，包括我们定义的普通函数、成员函数、重载的操作符、构造函数定义的隐式类型转换、拷贝构造函数定义的拷贝操作…&lt;/p&gt;
+
+&lt;p&gt;未完待续&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">将P2P虚拟货币（比特币、莱特币….）的算力用于公共的分布式计算的猜想</title><link href="radiolover.github.io/2014/07/23/%E5%B0%86P2P%E8%99%9A%E6%8B%9F%E8%B4%A7%E5%B8%81%E7%9A%84%E7%AE%97%E5%8A%9B%E7%94%A8%E4%BA%8E%E5%85%AC%E5%85%B1%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84%E7%8C%9C%E6%83%B3.html" rel="alternate" type="text/html" title="将P2P虚拟货币（比特币、莱特币....）的算力用于公共的分布式计算的猜想" /><published>2014-07-23T10:52:37+08:00</published><updated>2014-07-23T10:52:37+08:00</updated><id>radiolover.github.io/2014/07/23/%E5%B0%86P2P%E8%99%9A%E6%8B%9F%E8%B4%A7%E5%B8%81%E7%9A%84%E7%AE%97%E5%8A%9B%E7%94%A8%E4%BA%8E%E5%85%AC%E5%85%B1%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84%E7%8C%9C%E6%83%B3</id><content type="html" xml:base="radiolover.github.io/2014/07/23/%E5%B0%86P2P%E8%99%9A%E6%8B%9F%E8%B4%A7%E5%B8%81%E7%9A%84%E7%AE%97%E5%8A%9B%E7%94%A8%E4%BA%8E%E5%85%AC%E5%85%B1%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84%E7%8C%9C%E6%83%B3.html">&lt;p&gt;比特币最近几年非常火爆。发明者中本聪设计了一个特定的算法用于生成（发行）比特币，让各位玩家（矿工）用自己的CPU、显卡，或者更加专业的矿机，通过无聊的并行计算算出比特币的特定密码（挖矿）。为了保证全网比特币按照特定的发行速度递增，并最终无限趋近于上限2100万枚，挖矿难度会根据全网算力进行动态调整。由于进场人数急剧增加，谁的算力大，谁挖到比特币的几率就高，因此这是一个类似于“军备竞赛”的过程。前期硬件投入，加上巨大的电力消耗，回本机会往往非常渺茫，更重要的是，全网如此巨大的计算力白白地消耗在毫无意义的运算中。从比特币衍生出的各类山寨币，其运作机制完全相同，同样在无畏地消耗着大量算力。&lt;/p&gt;
+
+&lt;p&gt;其中一个方案在最底层实现。由于各个矿机的平台不尽相同，使用者将自己要提交的代码，分解优化为一系列可重入的代码块（可以是函数），这些代码块之间除了数据传递，逻辑上是相互独立的，并且是有严格的先后线性顺序的，可并行安排。将这些代码按照某一平台进行编译，添加平台标记、顺序号，生成一系列代码段，并将这些binary提交到整个计算网络。相同平台的矿机(X86,ARM,SPARC,MOTO….)自动加载计算并返回结果给代码提交者。&lt;/p&gt;
+
+&lt;p&gt;显然，并行的计算，且每一个并行分支含有极高次迭代的循环结构，利用率是最好的。因此使用者设计代码时要尽量符合这样的标准。&lt;/p&gt;
+
+&lt;p&gt;从更高层次考虑，结构化程序理论表明，任何过程式语言都可以通过顺序、分支、循环三种基本结构进行组合。考虑将编程的基本单位，从语句提升为“算元”。经过精心挑选的基本算元（甚至可以是更高层的算法库）已安装在矿机中，使用者只需将运算过程（重复率很高的）按照一定的格式提交到全网，由网络自动分配算力，即可实现高效的利用。当然，这需要开发一种新的脚本语言。&lt;/p&gt;</content><author><name></name></author><summary type="html">比特币最近几年非常火爆。发明者中本聪设计了一个特定的算法用于生成（发行）比特币，让各位玩家（矿工）用自己的CPU、显卡，或者更加专业的矿机，通过无聊的并行计算算出比特币的特定密码（挖矿）。为了保证全网比特币按照特定的发行速度递增，并最终无限趋近于上限2100万枚，挖矿难度会根据全网算力进行动态调整。由于进场人数急剧增加，谁的算力大，谁挖到比特币的几率就高，因此这是一个类似于“军备竞赛”的过程。前期硬件投入，加上巨大的电力消耗，回本机会往往非常渺茫，更重要的是，全网如此巨大的计算力白白地消耗在毫无意义的运算中。从比特币衍生出的各类山寨币，其运作机制完全相同，同样在无畏地消耗着大量算力。</summary></entry><entry><title type="html">Linux Bash环境下特殊符号转义的小结</title><link href="radiolover.github.io/2014/02/18/Linux-Bash%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E8%BD%AC%E4%B9%89%E7%9A%84%E5%B0%8F%E7%BB%93.html" rel="alternate" type="text/html" title="Linux Bash环境下特殊符号转义的小结" /><published>2014-02-18T02:42:12+08:00</published><updated>2014-02-18T02:42:12+08:00</updated><id>radiolover.github.io/2014/02/18/Linux-Bash%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E8%BD%AC%E4%B9%89%E7%9A%84%E5%B0%8F%E7%BB%93</id><content type="html" xml:base="radiolover.github.io/2014/02/18/Linux-Bash%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E8%BD%AC%E4%B9%89%E7%9A%84%E5%B0%8F%E7%BB%93.html">&lt;p&gt;在bash中，$、*、?、[、]、’、”、`、\、有特殊的含义。类似于编译器的预编译过程，bash在扫描命令行的过程中，会在文本层次上，优先解释所有的特殊字符，之后对转换完成的新命令行，进行内核的系统调用。&lt;/p&gt;
+
+&lt;p&gt;其中，反引号类似于函数调用，而不仅仅是简单的文本替换及匹配。&lt;/p&gt;
+
+&lt;p&gt;命令行中，被单引号引用的部分，其中所有的特殊字符按照普通字符解释；&lt;/p&gt;
+
+&lt;p&gt;双引号引用的部分，仅解释$（美元符号）、\（\n \t除外）、`（反引号），解释后的文本仅按照普通文字处理（同单引号）。&lt;/p&gt;
+
+&lt;p&gt;反引号相当于命令替换，引用的部分优先执行，将运行结果替换到外层的命令行文本中；反引号可以嵌套，但是嵌套时内部的反引号必须用\转义&lt;/p&gt;
+
+&lt;p&gt;反斜杠用于命令换行，以及echo -e解释。&lt;/p&gt;
+
+&lt;p&gt;网上各种文章常见的例子，其中第二行重点介绍一下：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# x=*                     
+# echo $x　　　　　　此行执行了两次替换，将$x替换为*，之后将*替换为当前目录下所有文件列表的文本，
+
+　　　　　　　　　　该文本作为参数赋给echo（bash会自动按照优先级，进行多层次替换 ）
+hello.sh menus.sh misc.sh phonebook tshift.sh
+# echo '$x'               $x不进行任何解释，直接将文本‘$x’作为参数赋给echo
+$x
+# echo &quot;$x&quot;              $x替换为*，但是由于在双引号内，*不做替换，因此文本“*”将作为参数赋给echo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;p&gt;大多数Linux Distribution的默认shell为bash，查询当前主机所有shell可执行如下命令：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cat  /etc/shell
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;bash内部集成了40多条命令，通用格式为：&lt;/p&gt;
+
+&lt;p&gt;$ 命令 [-选项] [参数]&lt;/p&gt;
+
+&lt;p&gt;其中，”-“后为单字符选项，”–“后为完整的单词选项。一般来说，命令的某项功能(feature)，会同时支持单字符选项及对应的多字符选项。&lt;/p&gt;
+
+&lt;p&gt;在bash中，&lt;em&gt;、?、[、]有特殊的含义，用于字符匹配。&lt;/em&gt;代表0到多个字符，？代表单个字符。[]用于匹配单个字符，内部用短横线按照ASCII码顺序标明匹配的字符范围，或者枚举所有要匹配的字符。&lt;/p&gt;</content><author><name></name></author><summary type="html">在bash中，$、*、?、[、]、’、”、`、\、有特殊的含义。类似于编译器的预编译过程，bash在扫描命令行的过程中，会在文本层次上，优先解释所有的特殊字符，之后对转换完成的新命令行，进行内核的系统调用。</summary></entry></feed>

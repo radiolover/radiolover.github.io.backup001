@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>&lt;Coding/&gt; - 午夜场</title>
-  <meta name="description" content="- 午夜场 - 一个想用技术改变世界却被世界用魔术改变的人的一些事情 - 科技美学 - 爱好天文的工程师 - 上海 - WIRELESS - 区块链 - 自驾旅行 - 尼康爱好者 - EDM - 火车迷 - 极简主义">
+  <title>python中的“引用”和C++的引用</title>
+  <meta name="description" content="python并不刻意区分“按值传递”和“按引用传递”。">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="radiolover.github.io/">
+  <link rel="canonical" href="radiolover.github.io/2016/06/27/python%E4%B8%AD%E7%9A%84-%E5%BC%95%E7%94%A8-%E5%92%8CC-%E7%9A%84%E5%BC%95%E7%94%A8.html">
   <link rel="alternate" type="application/rss+xml" title="&lt;Coding/&gt; - 午夜场" href="/feed.xml">
   
   
@@ -67,128 +67,31 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">python中的“引用”和C++的引用</h1>
+    <p class="post-meta">
+      <time datetime="2016-06-27T02:48:18+08:00" itemprop="datePublished">
+        
+        Jun 27, 2016
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>python并不刻意区分“按值传递”和“按引用传递”。</p>
+
+<p>在底层，python将值分为不可变对象(比如int,str)和可变对象(比如列表)。所有的变量都是对某个对象的引用，赋值（=）和函数参数传递，都将改变变量所引用的对象。</p>
+
+<p>对于不可变对象，赋值和传参将导致新创建对象，这和C++的引用行为是不同的。此时，赋值和传参是按值传递。</p>
+
+<p>对于可变对象，赋值和传参，和C++引用的行为一致，是真正的按引用传递。</p>
+
+  </div>
+
   
-  
-
-
-  <ul class="post-list">
-    
-      <li>
-        
-        <span class="post-meta">Sep 16, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html">Git简易参考手册</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Aug 30, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/08/30/%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F%E5%80%BC%E7%9A%84%E8%AF%BB%E5%8F%96Part2.html">字节序转换与结构体位域值(bit field)的读取Part2-深入理解字节序和结构体位域存储方式</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jun 27, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/06/27/python%E4%B8%AD%E7%9A%84-%E5%BC%95%E7%94%A8-%E5%92%8CC-%E7%9A%84%E5%BC%95%E7%94%A8.html">python中的“引用”和C++的引用</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">May 29, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/05/29/%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F%E5%80%BC%E7%9A%84%E8%AF%BB%E5%8F%96.html">字节序转换与结构体位域（bit field）值的读取</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Mar 15, 2015</span>
-
-        <h2>
-          <a class="post-link" href="/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92-%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88.html">时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Mar 1, 2015</span>
-
-        <h2>
-          <a class="post-link" href="/2015/03/01/%E6%89%8B%E6%9C%BA%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86.html">手机定位原理 - GPS/GLONASS/北斗 + WIFI + 基站</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Oct 22, 2014</span>
-
-        <h2>
-          <a class="post-link" href="/2014/10/22/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E4%B9%89%E8%80%A6%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%80%BB%E7%BB%93.html">架构设计中常见的语义耦合类型的总结</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Sep 7, 2014</span>
-
-        <h2>
-          <a class="post-link" href="/2014/09/07/C-%E8%AF%AD%E8%A8%80%E4%BD%93%E7%B3%BB%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9A%8F%E6%83%B3-%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD.html">C++语言体系设计哲学的一些随想(未完待续)</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Jul 23, 2014</span>
-
-        <h2>
-          <a class="post-link" href="/2014/07/23/%E5%B0%86P2P%E8%99%9A%E6%8B%9F%E8%B4%A7%E5%B8%81%E7%9A%84%E7%AE%97%E5%8A%9B%E7%94%A8%E4%BA%8E%E5%85%AC%E5%85%B1%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84%E7%8C%9C%E6%83%B3.html">将P2P虚拟货币（比特币、莱特币....）的算力用于公共的分布式计算的猜想</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Feb 18, 2014</span>
-
-        <h2>
-          <a class="post-link" href="/2014/02/18/Linux-Bash%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E8%BD%AC%E4%B9%89%E7%9A%84%E5%B0%8F%E7%BB%93.html">Linux Bash环境下特殊符号转义的小结</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Sep 15, 2013</span>
-
-        <h2>
-          <a class="post-link" href="/2013/09/15/Visual-C-%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0Soft-AP-HostedNetwork-%E6%89%BF%E8%BD%BD%E7%BD%91%E7%BB%9C-%E5%8A%9F%E8%83%BD.html">Visual C++ 编程实现Soft AP (HostedNetwork/承载网络) 功能</a>
-        </h2>
-      </li>
-    
-      <li>
-        
-        <span class="post-meta">Sep 10, 2013</span>
-
-        <h2>
-          <a class="post-link" href="/2013/09/10/%E7%A6%81%E7%94%A8%E9%A9%B1%E5%8A%A8%E7%AD%BE%E5%90%8D%E6%9C%80%E8%AF%A6%E7%BB%86%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B.html">Windows 8 / 8.1 禁用驱动签名最详细图文教程</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </main>

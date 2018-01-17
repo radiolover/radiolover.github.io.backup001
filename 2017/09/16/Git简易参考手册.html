@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Git简易参考手册</title>
+  <meta name="description" content="如果用过mercury(HG)，那么理解Git的运作方式就轻松多了。两者是相同的分布式版本管理工具，只是某些功能有着细微的差别 - Git的管理粒度更加细腻，因此操作上也比HG复杂一点。例如，修改文件并提交，hg会自动跟踪到，并不需要你去手动add，但是在git里，无论新增还是修改，都必须add相应的文件才可以c...">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="radiolover.github.io/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt;Coding/&gt; - 午夜场" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">&lt;Coding/&gt; - 午夜场</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Git简易参考手册</h1>
+    <p class="post-meta">
+      <time datetime="2017-09-16T05:52:47+08:00" itemprop="datePublished">
+        
+        Sep 16, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>如果用过mercury(HG)，那么理解Git的运作方式就轻松多了。两者是相同的分布式版本管理工具，只是某些功能有着细微的差别 - Git的管理粒度更加细腻，因此操作上也比HG复杂一点。例如，修改文件并提交，hg会自动跟踪到，并不需要你去手动add，但是在git里，无论新增还是修改，都必须add相应的文件才可以commit.这样概念上可以保持一致性（计算机的美学）。</p>
+
+<p>安装和创建版本库：</p>
+
+<p>sudo apt-get install git</p>
+
+<p>创建全新仓库：</p>
+
+<p>mkdir new_repo</p>
+
+<p>cd new_repo</p>
+
+<p>git init</p>
+
+<p>此时即可创建一个全新的仓库。命令执行后，可以看到.git的隐藏文件夹，这是跟踪版本仓库的数据库。</p>
+
+<p>远程克隆仓库：</p>
+
+<p>git clone git@github.com:homer_simpson/repo_one.git</p>
+
+<p>执行后会在本地创建同名文件夹repo_one</p>
+
+<p>基本操作:</p>
+
+<p>git reflog   // git历史操作</p>
+
+<p>git add <filename>   // 新增filename 到版本库，或者修改了filename,提交到暂存区</filename></p>
+
+<p>git rm <filename>    // 从版本库移除filename</filename></p>
+
+<p>git commit -m “comment”  // 提交暂存区的内容到changeset，如果修改没有add/rm到暂存区，则提交不了修改</p>
+
+<p>git log  // 查看历史提交,完整信息</p>
+
+<p>git log –pretty=oneline  // 查看历史提交,单行显示</p>
+
+<p>git log –graph   // 分支图形方式显示LOG</p>
+
+<p>git log –abbrev-commit // 缩写方式显示LOG</p>
+
+<p>git diff (<filename>)  // 查看未add/rm的修改内容</filename></p>
+
+<p>git diff HEAD – readme.txt  // 查看已提交的修改内容</p>
+
+<p>git diff <source_branch> <target_branch>  // 查看分支间差异</target_branch></source_branch></p>
+
+<p>git status // 查看文件状态，新增/修改/删除，工作区/暂存区</p>
+
+<p>git checkout – <filename>  // 撤销工作区修改，暂存区和已提交的不受影响</filename></p>
+
+<p>git reset HEAD <filename> // unstage,暂存区撤销回工作区</filename></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>git reset –hard HEAD^</td>
+      <td><commit>  // 修改HEAD指针到新位置（等效于撤销已提交的修改，放弃commit id后的所有修改）</commit></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>HEAD代表当前指针，HEAD^前一个版本，HEAD^^往前第二个版本，HEAD~50往前50个版本</p>
+
+<p>分支操作：</p>
+
+<p>GIT管理系统里，每个分支对应一个指针指向当前分支的头部节点，HEAD通过指向分支指针从而指向某一分支的头部节点。</p>
+
+<p>master分支是始终存在的。</p>
+
+<p>如无特殊说明，merge分支优先使用fast-forward模式，如果不能FF,则用普通的merge</p>
+
+<p>merge冲突时，Git用«««&lt;，=======，»»»&gt;标记出不同分支的内容，此时直接编辑文件，add 文件并commit</p>
+
+<p>git branch  // 查看分支</p>
+
+<p>git branch <branch name="">  //创建分支</branch></p>
+
+<p>git branch -d <branch_name>  // 删除分支</branch_name></p>
+
+<p>git branch -D <branch_name> // 强制删除分支（一般当这个分支没有merge到其他分支而被丢弃时）</branch_name></p>
+
+<p>git checkout <branch_name> // 切换分支</branch_name></p>
+
+<p>git checkout -b <branche_name> // 创建分支并切换过去</branche_name></p>
+
+<p>git merge <branch_name> // 将branch_name merge到当前分支,包括合并文件，add文件+commit</branch_name></p>
+
+<p>git merge -m “comment” <branch_name>  // 为merge的commit添加注释</branch_name></p>
+
+<p>git merge –no-ff -m “comment” <branch_name> // 禁用ff模式</branch_name></p>
+
+<p>工作区暂存：</p>
+
+<p>git stash  // 当前分支的工作区内容暂存起来。此时git status是干净的</p>
+
+<p>git stash list // 列出暂存区</p>
+
+<p>git stash apply <stashname> // 恢复工作区</stashname></p>
+
+<p>git stash drop <stashname> // 删除stash列表项</stashname></p>
+
+<p>git stash pop  // 恢复stash顶端并删除</p>
+
+<p>标签管理；</p>
+
+<p>git tag // 查看标签</p>
+
+<p>git tag <tag_name> // 在当前分支当前头打上标签</tag_name></p>
+
+<p>git tag <tag_name>  <commit>  // 在某个commit上打上标签</commit></tag_name></p>
+
+<p>git show <tag_name>  // 显示标签对应commit的内容</tag_name></p>
+
+<p>git tag -a <tag_name> -m "blablabla..."  //添加标签信息</tag_name></p>
+
+<p>git tag -d <tag_name>   // 删除本地标签</tag_name></p>
+
+<p>git push origin <tag_name>  // 推送本地标签</tag_name></p>
+
+<p>git push origin –tags  // 推送本地所有标签</p>
+
+<p>git push origin :refs/tags/<tag_name>  //删除远程标签</tag_name></p>
+
+<p>远程协作：</p>
+
+<p>几个基本概念：</p>
+
+<p>远程引用：对远程仓库的引用，用一个名字标识，默认为origin.</p>
+
+<p>远程分支：远端服务器上仓库里的分支。</p>
+
+<p>远程跟踪分支：对远程分支状态的快照，用户不能自己修改，只有clone, fetch或者pull等同步到本地后变更，用于引用远程分支。名字为 remote/branch,例如origin/master</p>
+
+<p>本地分支：本地仓库的分支。</p>
+
+<p>跟踪分支：用于跟踪远程分支的本地分支，一般用于关联远程分支。</p>
+
+<p>一般情况下，如果要远程协作，需要建立远程引用，关联本地跟踪分支到远程跟踪分支。</p>
+
+<p>git clone时，自动创建远程引用，名字为origin；自动创建所有远程跟踪分支，包括origin/master；自动创建本地分支master并关联到origin/master上。git clone -o <remote>用于指定别的名字。因此，除了master外，其他分支需要自己手动创建跟踪分支。</remote></p>
+
+<p>git pull 只在当前分支是关联到远程分支上才有效，是git fetch和git merge的封装，只在当前分支上有效。</p>
+
+<p>git remote添加远程引用的情形，所有工作都要自己完成。</p>
+
+<p>所有的分支都是指针，并不是某一个changeset链条的实体，因此某一个“分支”可以自由指向任意链条，或者跟踪远程分支。</p>
+
+<p>可以远程引用多个仓库，仓库名不同，这样fetch到本地后，多个仓库的远程跟踪分支可以共存。自己推动也可以指定任意仓库来推送。分支只是指针，如果多个仓库的changeset有交集，那么本地只有一份changeset链条拷贝，多个仓库的同名分支指向不同的结点。</p>
+
+<p>查看远程分支信息：</p>
+
+<p>git remote // 查看本地已有的远程引用</p>
+
+<p>git remote -v // 查看远程仓库的详细信息</p>
+
+<p>git ls-remote (remote) // 查看remote上的远程引用</p>
+
+<p>git remote show (remote) // 查看remote上的远程分支信息</p>
+
+<p>本地仓库关联远程仓库（非clone）:</p>
+
+<p>git remote add origin git@github.com:homer_simpson/repo_one.git   //  创建远程仓库名字，即表示创建本地仓库和远程仓库的连接。origin是约定俗成的远程仓库的名字</p>
+
+<p>git fetch origin  // 获取远程仓库更新的changeset,并更新远程跟踪分支到新位置（可能和本地跟踪分支分叉）</p>
+
+<p>git merge origin/master   // 将fetch下来的更新，merge到当前分支</p>
+
+<p>本地新分支推送到远端（跟踪关系自动建立）：</p>
+
+<p>git push origin serverfix // 推送本地分支更新，或本地新分支到仓库上</p>
+
+<p>git push origin serverfix:serverfix // 等效于上一条命令</p>
+
+<p>git push origin serverfix:awesomebranch // 推送本地分支到远程另一个名字的分支</p>
+
+<p>对远端新分支建立本地跟踪分支：</p>
+
+<p>git fetch origin  // 先获取远程新分支</p>
+
+<p>git checkout -b serverfix origin/serverfix  // 建立serverfix分支为origin/serverfix的跟踪分支(指针指向origin/serverfix，以origin/serverfix为start point)</p>
+
+<p>git checkout –track origin/serverfix  // 等效于上一条</p>
+
+<p>git checkout -b sf origin/serverfix  // 用一个不同的本地跟踪分支名字</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>git branch -u</td>
+      <td>–set-upstream origin/serverfix  // 将当前分支跟踪到远程分支(当前分支变为远程分支的跟踪分支，分支只是指针，因此可以跳跃到任何地点)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>拉取推送：</p>
+
+<p>git pull  // git fetch + git merge,必须是跟踪分支</p>
+
+<p>git push <remote>  <branch>  // 将branch的内容推送的remote,必须是个跟踪分支</branch></remote></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>git push -u origin master</td>
+      <td>git push –set-upstream origin master  // 第一次push，先关联本地分支和远程分支</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>删除远程分支：</p>
+
+<p>git push origin –delete serverfix</p>
+
+<p>Git系统配置：</p>
+
+<p>git config –global user.name “Your Name”  //设置名字</p>
+
+<p>git config –global user.email “email@example.com”// 设置邮箱地址</p>
+
+<p>git config –global color.ui true  // 显示不同的颜色</p>
+
+<p>git config –global alias.st status  // 配置别名</p>
+
+<p>可在根工作区创建.gitignore，配置GIT不跟踪的文件，但是可用命令git add -f <file_name>强行添加， git check-ignore -v <file_name>可以检查当前文件是否被过滤。</file_name></file_name></p>
+
+<p>.git/config保存全局配置。</p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">&lt;Coding/&gt; - 午夜场</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              &lt;Coding/&gt; - 午夜场
+            
+            </li>
+            
+            <li><a href="mailto:solarwindsj@gmail.com">solarwindsj@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/radiolover"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">radiolover</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/solarwindsj"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">solarwindsj</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>&lt;Coding/&gt; - 午夜场 - 一个想用技术改变世界却被世界用魔术改变的人的一些事情 - 科技美学 - 爱好天文的工程师 - 上海 - WIRELESS - 区块链 - 自驾旅行 - 尼康爱好者 - EDM - 火车迷 - 极简主义</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

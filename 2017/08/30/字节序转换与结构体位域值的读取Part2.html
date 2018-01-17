@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>字节序转换与结构体位域值(bit field)的读取Part2-深入理解字节序和结构体位域存储方式</title>
+  <meta name="description" content="上一篇文章讲解了带位域的结构体，在从大端机（Big Endian）传输到小端机(Little Endian)后如何解析位域值。下面继续深入详解字节序，以及位域存储的方式。">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="radiolover.github.io/2017/08/30/%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%8D%E5%9F%9F%E5%80%BC%E7%9A%84%E8%AF%BB%E5%8F%96Part2.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt;Coding/&gt; - 午夜场" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">&lt;Coding/&gt; - 午夜场</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">字节序转换与结构体位域值(bit field)的读取Part2-深入理解字节序和结构体位域存储方式</h1>
+    <p class="post-meta">
+      <time datetime="2017-08-30T22:11:37+08:00" itemprop="datePublished">
+        
+        Aug 30, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>上一篇文章讲解了带位域的结构体，在从大端机（Big Endian）传输到小端机(Little Endian)后如何解析位域值。下面继续深入详解字节序，以及位域存储的方式。</p>
+
+<p>(1) 我们知道，存储数字时，对小端机而言，数字的低位，存在低地址，高位存在高地址。大端机正相反。</p>
+
+<p>(2) 读取的方式，也是一样的。对于小端机，读出的低地址位作为数字的低位。</p>
+
+<p>(3) 此外Big-Endian/Little-Endian存储顺序，不仅仅针对字节，还针对字节内的比特位。对于小端机而言，字节内的8个比特，低地址端比特位，对应二进制数字的低位。</p>
+
+<p>(4) 对于结构体的多个位域，和普通成员一样，编译器同样按照地址由低到高顺序存储，无论是大端机还是小端机。只是位域内的比特顺序有区别罢了。</p>
+
+<p>(5) 表述一个数值，可以使用两种视图 :</p>
+
+<p>第一个是“逻辑视图”，通俗的表述方式，也就是我们平时在书本上看到的，手写数字时的方式。左边为高位，右边为低位。例如 375，-4.1，036，0xAF4D215B</p>
+
+<p>另一个是“内存视图”，即数字在内存中的存储方式，是我们程序员专有的一种表述方式。左边为低地址字节，右边为高地址字节。字节内左边为低地址比特位，右边为高地址比特位。很明显，同一个unsigned int值,在大端机、小端机上，分别有两种不同的“内存视图”。</p>
+
+<p>例如，uint16 0x2A1F，二进制比特位为0010 1010 0001 1111 （显然这一行使用的就是“逻辑视图”）</p>
+
+<p>在小端机上的“内存视图”为：1111 1000 0101 0100 （低地址 -&gt; 高地址）</p>
+
+<p>在大端机上的“内存视图”为：0010 1010 0001 1111 （低地址 -&gt; 高地址）</p>
+
+<p>另外可以看到，大端机的”内存视图”和”逻辑视图”是相同的。在很多相关的文章里，并没有去区分数字的两种表述方式，导致了很多混淆。其次，很多例子使用16进制，只能用于表达字节序，无法精确表达内部的比特顺序。</p>
+
+<p>再举一个上一节使用过的例子：</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_exam_</span>
+<span class="p">{</span>
+<span class="err">　　</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">tag</span> <span class="o">:</span> <span class="mi">6</span><span class="p">;</span>
+<span class="err">　　</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">field1</span> <span class="o">:</span> <span class="mi">3</span><span class="p">;</span>
+<span class="err">　　</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">field2</span> <span class="o">:</span> <span class="mi">7</span><span class="p">;</span>
+<span class="err">　　</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">field3</span> <span class="o">:</span> <span class="mi">11</span><span class="p">;</span>
+<span class="err">　　</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pad</span> <span class="o">:</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span><span class="n">Exam</span><span class="p">;</span>
+ 
+<span class="n">Exam</span> <span class="n">ex</span><span class="p">;</span>
+<span class="n">ex</span><span class="p">.</span><span class="n">tag</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="n">ex</span><span class="p">.</span><span class="n">field1</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">ex</span><span class="p">.</span><span class="n">field2</span> <span class="o">=</span> <span class="mh">0x3a</span><span class="p">;</span>
+<span class="n">ex</span><span class="p">.</span><span class="n">field3</span> <span class="o">=</span> <span class="mh">0x4C1</span><span class="p">;</span>
+<span class="n">ex</span><span class="p">.</span><span class="n">pad</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>变量ex的6个位域的”内存视图”，在大端机是000100 010 0111010 10010110001 00000（低地址-&gt;高地址），在小端机是001000 010 0101110 10001101001 00000（低地址-&gt;高地址）。可见位域顺序是一样的，但是位域内比特位顺序不同。</p>
+
+<p>若按照4位一组，大端机”内存视图”为 0001 0001 0011 1010 1001 0110 0010 0000，如果按照unsigned int的方式读取这块内存，结果是0x113A9620，四个比特位对应一个16进制数，和”逻辑视图”完全一样</p>
+
+<p>在小端机上4位一组排列，”内存视图”为 0010 0001 0010 1110 1000 1101 0010 0000，如果按照unsigned int的方式读取这块内存，就会按照小端机的方式来解析内存。可以先把二进制翻译为”逻辑视图” - 把整个”内存视图”32位颠倒顺序，结果是0x04B17484，注意不是0x212E8D20.</p>
+
+<p>那么这些规则，对位域值的读取有什么影响呢？</p>
+
+<p>字节流在网络上传输是按照网络字节序传输的，也就是大端序。网卡不知道数据的含义(到底是int还是double,还是什么image)，只能看到一个个字节，因此它做的就是把每个字节的8个比特位转换为本机的位序。而具体的内容，则由我们的程序处理。比如对于整形等，调用socket接口的ntohl(),htonl()…等函数转换字节序。顺便提一句，对于float/double类型，可以直接memcpy到一个整形里面，之后按照整形正常的处理流程，到了目标机后，再memcpy到一个float/double里。</p>
+
+<p>char,short,int,long等2次幂大小的整形，作为一个单独的整体，经过整个流程梳理是没有任何问题的。但无法保证结构体内的多个位域，按照定义的先后顺序，从低地址到高地址排列。这意味着，无论如何，直接在代码中使用ex.tag的方式，是读不出tag位域的数据的。</p>
+
+<p>细分有如下几种情况：
+(1) 主机内部传输无任何影响，毕竟是一样的CPU架构。</p>
+
+<p>(2) 相同字节序的主机间传输，同样没有影响。因为经过二次socket+网卡转换后，码流是相同的。读者可自行验证。</p>
+
+<p>(3) 大端机传输到小端机（上一节所描述的）。下列二进制值如没有特殊说明，都是”内存视图”。</p>
+
+<p>还以上面的位域为例，在大端机的为000100 010 0111010 10010110001 00000（低地址-&gt;高地址），按照四比特一组为： 0001 0001  0011 1010  1001 0110  0010 0000</p>
+
+<p>传输到网络中，由于大端序和网络序相同，所以网卡不做转换，字节流按照先后，依然是 0001 0001  0011 1010  1001 0110  0010 0000</p>
+
+<p>传输到小端机，网卡自动转换每个字节的比特序，但字节顺序维持原状， 1000 1000 0101 1100 0110 1001 0000 0100，可见原先跨字节相连的位域被”打散了”。字节内的位域，虽然比特顺序对了，但是从低比特位挪到了高比特位，位置错了。</p>
+
+<p>调用ntohl,比特序不变，转换字节序，0000 0100 0110 1001 0101 1100 1000 1000，效果是跨字节位域再次连通了。位域内存地址顺序，正好和原先相反。如果把大端机的内存视图画到一张纸上，相当于翻到纸的背面。</p>
+
+<p>此时，将这4个字节码流当作unsigned int，得到一个”无符号整形”，其”逻辑视图”等于大端机上的“内存视图”。左边恰好是结构体最开始的位域：0001 0001  0011 1010  1001 0110  0010 0000。因此我们将错就错，直接使用位操作符来左移相应的位数（需要计算后边所有位域的总比特数），即可得到对应的位域值。位移操作符等，都是对”逻辑视图”操作的。</p>
+
+<p>(4) 小端机传到大端机。网卡转换+ntohl转换后，依然在内存中得到一个位域顺序和正常顺序相反的”无符号整形”。只是这次使用位运算符要注意，第一个位域在”逻辑视图”的最右边，依次向左类推，和(3)的情形是相反的。</p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">&lt;Coding/&gt; - 午夜场</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              &lt;Coding/&gt; - 午夜场
+            
+            </li>
+            
+            <li><a href="mailto:solarwindsj@gmail.com">solarwindsj@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/radiolover"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">radiolover</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/solarwindsj"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">solarwindsj</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>&lt;Coding/&gt; - 午夜场 - 一个想用技术改变世界却被世界用魔术改变的人的一些事情 - 科技美学 - 爱好天文的工程师 - 上海 - WIRELESS - 区块链 - 自驾旅行 - 尼康爱好者 - EDM - 火车迷 - 极简主义</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
