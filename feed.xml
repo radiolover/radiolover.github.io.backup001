@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://www.sujing.info/feed.xml" rel="self" type="application/atom+xml" /><link href="http://www.sujing.info/" rel="alternate" type="text/html" /><updated>2018-01-17T21:05:13+08:00</updated><id>http://www.sujing.info/</id><title type="html">&lt;Coding /&gt;
- - 午夜场</title><subtitle>&lt;Coding/&gt; - 午夜场 - 一个想用技术改变世界却被世界用魔术改变的人的一些事情 - 科技美学 - 爱好天文的工程师 - 上海 - WIRELESS - 区块链 - 自驾旅行 - 尼康爱好者 - EDM - 火车迷 - 极简主义</subtitle><entry><title type="html">Git简易参考手册</title><link href="http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html" rel="alternate" type="text/html" title="Git简易参考手册" /><published>2017-09-16T05:52:47+08:00</published><updated>2017-09-16T05:52:47+08:00</updated><id>http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C</id><content type="html" xml:base="http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html">&lt;p&gt;如果用过mercury(HG)，那么理解Git的运作方式就轻松多了。两者是相同的分布式版本管理工具，只是某些功能有着细微的差别 - Git的管理粒度更加细腻，因此操作上也比HG复杂一点。例如，修改文件并提交，hg会自动跟踪到，并不需要你去手动add，但是在git里，无论新增还是修改，都必须add相应的文件才可以commit.这样概念上可以保持一致性（计算机的美学）。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://www.sujing.info/feed.xml" rel="self" type="application/atom+xml" /><link href="http://www.sujing.info/" rel="alternate" type="text/html" /><updated>2018-01-18T17:39:39+08:00</updated><id>http://www.sujing.info/</id><title type="html">/* Coding - 午夜场 */</title><subtitle>一个想用技术改变世界却被世界用魔术改变的人的一些事情</subtitle><entry><title type="html">Git简易参考手册</title><link href="http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html" rel="alternate" type="text/html" title="Git简易参考手册" /><published>2017-09-16T05:52:47+08:00</published><updated>2017-09-16T05:52:47+08:00</updated><id>http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C</id><content type="html" xml:base="http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html">&lt;p&gt;如果用过mercury(HG)，那么理解Git的运作方式就轻松多了。两者是相同的分布式版本管理工具，只是某些功能有着细微的差别 - Git的管理粒度更加细腻，因此操作上也比HG复杂一点。例如，修改文件并提交，hg会自动跟踪到，并不需要你去手动add，但是在git里，无论新增还是修改，都必须add相应的文件才可以commit.这样概念上可以保持一致性（计算机的美学）。&lt;/p&gt;
 
 &lt;p&gt;安装和创建版本库：&lt;/p&gt;
 
@@ -250,21 +249,7 @@
 
 &lt;p&gt;再举一个上一节使用过的例子：&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -278,8 +263,7 @@
 &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x3a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x4C1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;变量ex的6个位域的”内存视图”，在大端机是000100 010 0111010 10010110001 00000（低地址-&amp;gt;高地址），在小端机是001000 010 0101110 10001101001 00000（低地址-&amp;gt;高地址）。可见位域顺序是一样的，但是位域内比特位顺序不同。&lt;/p&gt;
 
@@ -322,22 +306,14 @@
 
 &lt;p&gt;例如：&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;其中，tag,field2,pad是字节内位域，field1和field3是跨字节位域。当这个结构体从某个大端序平台（例如MIPS,big-endian）通过网络传送到PC机（little-endian），在pc机上无论调用ntohl与否，直接通过Exam.field3语句都无法获取正确的值。&lt;/p&gt;
 
@@ -347,29 +323,20 @@
 
 &lt;p&gt;此时Exam的5个成员将暂时按照地址从高到低的顺序排列（正确的情况下，无论BE还是LE，结构体内部的成员都应当按照先后顺序，从低地址到高地址排列）。&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt; &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
  &lt;span class=&quot;n&quot;&gt;memcpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ntohl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+ &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ntohl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;(2)使用位运算符获取位域正确值。&lt;/p&gt;
 
 &lt;p&gt;经过上一步骤，虽然Exam的成员(将temp内的码流当作Exam)在内存中的排列顺序是错的，但我们将错就错。从日常印刷书写的“逻辑视图”角度看，Exam.tag在“最左端”(高位)，Exam.pad在“最右端”（低位），且5个位域内的比特顺序也是正确的。因此可以直接用移位运算符获取其中的值。&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 高位全部为0，不必使用位与运算
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00000007&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 只获取移位操作结果的低3位。
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x0000007F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
 &lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x000007FF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-&lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x0000001F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><summary type="html">最近又遇到了几年前遇到的问题，标记一下。</summary></entry><entry><title type="html">时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？</title><link href="http://www.sujing.info/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92-%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88.html" rel="alternate" type="text/html" title="时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？" /><published>2015-03-15T13:35:37+08:00</published><updated>2015-03-15T13:35:37+08:00</updated><id>http://www.sujing.info/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92:%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88</id><content type="html" xml:base="http://www.sujing.info/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92-%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88.html">&lt;p&gt;去年互联网地图行业开始引入众包模式，国内比较大的地图商，比如四维图新、高德地图、百度地图纷纷开始推出UGC应用，众包给用户采集门址、公交站等信息，并按照工作量给与采集者一定的回报。我曾经玩过某德推出的“道路寻宝”APP，应用内部集成了道路拍拍、门址采集、公交拍拍、POI任务等。该应用有如下限制：（1）为了防止作弊，采集者必须打开GPS，才能拍摄门牌号。（2）为了保证图片清晰，采集工作只能在日出后半小时至日落前半小时内进行。问题在于，应用仅仅读取手机的时间进行日出日落时间判断。有一次晚上参加用户线上会议，一位远在新疆的采集者抱怨，往往烈日当头采集就被强制结束。PS:其实还有一个BUG他没有发现：太阳升起之前，采集就已经放开了；而且如果你是位于东北三省东部的用户，在日落后依然可以采集~&lt;/p&gt;
+&lt;span class=&quot;n&quot;&gt;ExamWin32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x0000001F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><summary type="html">最近又遇到了几年前遇到的问题，标记一下。</summary></entry><entry><title type="html">时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？</title><link href="http://www.sujing.info/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92-%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88.html" rel="alternate" type="text/html" title="时区之痒 - 从手机GPS模块获取的时间，真的是北京时间么？" /><published>2015-03-15T13:35:37+08:00</published><updated>2015-03-15T13:35:37+08:00</updated><id>http://www.sujing.info/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92:%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88</id><content type="html" xml:base="http://www.sujing.info/2015/03/15/%E6%97%B6%E5%8C%BA%E4%B9%8B%E7%97%92-%E4%BB%8E%E6%89%8B%E6%9C%BAGPS%E6%A8%A1%E5%9D%97%E8%8E%B7%E5%8F%96%E7%9A%84%E6%97%B6%E9%97%B4,%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E4%B9%88.html">&lt;p&gt;去年互联网地图行业开始引入众包模式，国内比较大的地图商，比如四维图新、高德地图、百度地图纷纷开始推出UGC应用，众包给用户采集门址、公交站等信息，并按照工作量给与采集者一定的回报。我曾经玩过某德推出的“道路寻宝”APP，应用内部集成了道路拍拍、门址采集、公交拍拍、POI任务等。该应用有如下限制：（1）为了防止作弊，采集者必须打开GPS，才能拍摄门牌号。（2）为了保证图片清晰，采集工作只能在日出后半小时至日落前半小时内进行。问题在于，应用仅仅读取手机的时间进行日出日落时间判断。有一次晚上参加用户线上会议，一位远在新疆的采集者抱怨，往往烈日当头采集就被强制结束。PS:其实还有一个BUG他没有发现：太阳升起之前，采集就已经放开了；而且如果你是位于东北三省东部的用户，在日落后依然可以采集~&lt;/p&gt;
 
 &lt;p&gt;那么问题到底出在什么地方？先从时区谈起。&lt;/p&gt;
 
@@ -408,19 +375,7 @@
 
 &lt;p&gt;第二，有些Android手机厂商开发的driver实在是太烂了，通过getTime可能获取不到当地理论时间，那么只有通过GPS读取的经度进行代码switch-case条件判断了：&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
@@ -432,8 +387,7 @@
 
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;127.5E-142.5&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;（理论东九区）&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;使用当地理论时间即“手机时间（北京时间）&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;小时”判断；&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// 黑龙江佳木斯市抚远县黑瞎子岛差不多就在134E，这里是中国最东端
 &lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;更好的做法，就是在按照上述方式获得当地理论时间后，还要直接通过GPS经纬度，计算该点的日出日落时刻。因为该方式是精确到点的，因此计算的日出日落时刻和实际的日出日落时刻的误差只有几秒。而采用“6点日出18点日落”，误差有时会很大。这需要复杂的科学计算，用代码库可以实现。&lt;/p&gt;
 

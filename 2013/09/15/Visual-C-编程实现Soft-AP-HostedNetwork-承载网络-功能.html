@@ -1,113 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Visual C++ 编程实现Soft AP (HostedNetwork/承载网络) 功能</title>
-  <meta name="description" content="从Windows 7开始，微软在操作系统中加入的Soft AP功能，使用户能够通过无线网卡，开启虚拟AP，从而实现网络共享。Soft AP又称HostedNetwork(承载网络)，在Windows SDK中，提供了相应的API，以WlanHostedNetwork***开头的一系列函数。">
-
-  <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://www.sujing.info/2013/09/15/Visual-C-%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0Soft-AP-HostedNetwork-%E6%89%BF%E8%BD%BD%E7%BD%91%E7%BB%9C-%E5%8A%9F%E8%83%BD.html">
-  <link rel="alternate" type="application/rss+xml" title="&lt;Coding/&gt; - 午夜场" href="/feed.xml">
-  
-  
-</head>
-
-
-  <body>
-
-    <header class="site-header" role="banner">
-
-  <div class="wrapper">
-    
-    
-    <a class="site-title" href="/">&lt;Coding/&gt; - 午夜场</a>
-  
-    
-      <nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
-
-        <div class="trigger">
-          
-            
-            
-          
-            
-            
-            <a class="page-link" href="/about/">About</a>
-            
-          
-            
-            
-          
-            
-            
-          
-            
-            
-          
-        </div>
-      </nav>
-    
-  </div>
-</header>
-
-
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Visual C++ 编程实现Soft AP (HostedNetwork/承载网络) 功能</h1>
-    <p class="post-meta">
-      <time datetime="2013-09-15T03:19:18+08:00" itemprop="datePublished">
-        
-        Sep 15, 2013
-      </time>
-      </p>
-  </header>
-
-  <div class="post-content" itemprop="articleBody">
-    <p>从Windows 7开始，微软在操作系统中加入的Soft AP功能，使用户能够通过无线网卡，开启虚拟AP，从而实现网络共享。Soft AP又称HostedNetwork(承载网络)，在Windows SDK中，提供了相应的API，以WlanHostedNetwork***开头的一系列函数。</p>
-
-<p>要编码实现Soft AP，首先需要添加相应的头文件及lib库</p>
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cp">#include &lt;wlanapi.h&gt;
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class="no-js">
+<!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <title>Visual C++ 编程实现Soft AP (HostedNetwork/承载网络) 功能 – /* Coding - 午夜场 */</title> <meta name="description" content="一个想用技术改变世界却被世界用魔术改变的人的一些事情"> <meta name="keywords" content=""> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="http://www.sujing.info/assets/img/logo.png"> <meta name="twitter:title" content="Visual C++ 编程实现Soft AP (HostedNetwork/承载网络) 功能"> <meta name="twitter:description" content="从Windows 7开始，微软在操作系统中加入的Soft AP功能，使用户能够通过无线网卡，开启虚拟AP，从而实现网络共享。Soft AP又称HostedNetwork(承载网络)，在Windows SDK中，提供了相应的API，以WlanHostedNetwork***开头的一系列函数。"> <meta name="twitter:site" content="@solarwindsj"> <meta name="twitter:creator" content="@solarwindsj"> <!-- Open Graph --> <meta property="og:locale" content="zh_CN"> <meta property="og:type" content="article"> <meta property="og:title" content="Visual C++ 编程实现Soft AP (HostedNetwork/承载网络) 功能"> <meta property="og:description" content="从Windows 7开始，微软在操作系统中加入的Soft AP功能，使用户能够通过无线网卡，开启虚拟AP，从而实现网络共享。Soft AP又称HostedNetwork(承载网络)，在Windows SDK中，提供了相应的API，以WlanHostedNetwork***开头的一系列函数。"> <meta property="og:url" content="http://www.sujing.info/2013/09/15/Visual-C-%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0Soft-AP-HostedNetwork-%E6%89%BF%E8%BD%BD%E7%BD%91%E7%BB%9C-%E5%8A%9F%E8%83%BD.html"> <meta property="og:site_name" content="/* Coding - 午夜场 */"> <meta property="og:image" content="http://www.sujing.info/assets/img/logo.png"> <link rel="canonical" href="http://www.sujing.info/2013/09/15/Visual-C-%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0Soft-AP-HostedNetwork-%E6%89%BF%E8%BD%BD%E7%BD%91%E7%BB%9C-%E5%8A%9F%E8%83%BD.html"> <link href="http://www.sujing.info/feed.xml" type="application/atom+xml" rel="alternate" title="/* Coding - 午夜场 */ Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="http://www.sujing.info/assets/css/main.css"> <!-- JS --> <script src="http://www.sujing.info/assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="http://www.sujing.info/assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://www.sujing.info/assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://www.sujing.info/assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://www.sujing.info/assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="http://www.sujing.info/favicon.png"> <link rel="shortcut icon" href="http://www.sujing.info/favicon.ico"> <!-- Background Image --> <style type="text/css">body {background-image:url(http://www.sujing.info/assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="http://www.sujing.info/">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="http://www.sujing.info/assets/img/logo.png" alt="/* Coding - 午夜场 */ photo" class="author-photo"> <h4>/* Coding - 午夜场 */</h4> <p>一个想用技术改变世界却被世界用魔术改变的人的一些事情</p> </li> <li><a href="http://www.sujing.info/about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="http://twitter.com/solarwindsj" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a> </li> <li> <a href="http://instagram.com/radiolover1983" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-instagram"></i> Instagram</a> </li> <li> <a href="http://github.com/radiolover" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul>
+<!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="http://www.sujing.info/posts/">All Posts</a></li> <li><a href="http://www.sujing.info/tags/">All Tags</a></li> </ul> </li> <li><a href="http://www.sujing.info/projects/">Projects</a></li> </ul>
+<!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title "> <h1>Visual C++ 编程实现Soft AP (HostedNetwork/承载网络) 功能</h1> <h4>15 Sep 2013</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~2 minutes </p>
+<!-- /.entry-reading-time --> <a class="btn zoombtn" href="http://www.sujing.info/posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <p>从Windows 7开始，微软在操作系统中加入的Soft AP功能，使用户能够通过无线网卡，开启虚拟AP，从而实现网络共享。Soft AP又称HostedNetwork(承载网络)，在Windows SDK中，提供了相应的API，以WlanHostedNetwork***开头的一系列函数。</p> <p>要编码实现Soft AP，首先需要添加相应的头文件及lib库</p> <div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cp">#include &lt;wlanapi.h&gt;
 #include &lt;iphlpapi.h&gt;
 #include &lt;winsock2.h&gt;
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "Wlanapi.lib")
 #pragma comment(lib, "IPHLPAPI.lib"
-</span></code></pre>
-</div>
-
-<p>其中，wlanapi.h是无线网络API的声明文件，函数名一般以Wlan开头。iphlpapi.h用于调用GetAdapterInfo函数，获取网络虚拟接口信息。</p>
-
-<p>和winsock套接字编程类似，Wlan库使用前需获得句柄，并进行版本协商，只不过都在WlanOpenHandle实现了。使用完句柄后，调用WlanCloseHandle关闭以释放资源。</p>
-
-<p>WlanOpenHandle原形如下：</p>
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">DWORD</span> <span class="n">WINAPI</span> <span class="n">WlanOpenHandle</span><span class="p">(</span>
+</span></code></pre></div> <p>其中，wlanapi.h是无线网络API的声明文件，函数名一般以Wlan开头。iphlpapi.h用于调用GetAdapterInfo函数，获取网络虚拟接口信息。</p> <p>和winsock套接字编程类似，Wlan库使用前需获得句柄，并进行版本协商，只不过都在WlanOpenHandle实现了。使用完句柄后，调用WlanCloseHandle关闭以释放资源。</p> <p>WlanOpenHandle原形如下：</p> <div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">DWORD</span> <span class="n">WINAPI</span> <span class="n">WlanOpenHandle</span><span class="p">(</span>
   <span class="n">_In_</span>        <span class="n">DWORD</span> <span class="n">dwClientVersion</span><span class="p">,</span>
   <span class="n">_Reserved_</span>  <span class="n">PVOID</span> <span class="n">pReserved</span><span class="p">,</span>
   <span class="n">_Out_</span>       <span class="n">PDWORD</span> <span class="n">pdwNegotiatedVersion</span><span class="p">,</span>
   <span class="n">_Out_</span>       <span class="n">PHANDLE</span> <span class="n">phClientHandle</span>
 <span class="p">);</span>
-</code></pre>
-</div>
-<p>dwClientVersion指定程序期望使用的Wlan版本，使用宏WLAN_API_VERSION代替。从vista开始，版本号为2，xp系统为1。协商后的版本通过参数pdwNegotiatedVersion返回，通过检查主版本号来验证（如下代码所示）。句柄通过phClient返回。</p>
-
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">DWORD</span> <span class="n">dwError</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div> <p>dwClientVersion指定程序期望使用的Wlan版本，使用宏WLAN_API_VERSION代替。从vista开始，版本号为2，xp系统为1。协商后的版本通过参数pdwNegotiatedVersion返回，通过检查主版本号来验证（如下代码所示）。句柄通过phClient返回。</p> <div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">DWORD</span> <span class="n">dwError</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="n">DWORD</span> <span class="n">dwServiceVersion</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="n">HANDLE</span> <span class="n">hClient</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 
@@ -126,11 +34,7 @@
     <span class="p">{</span>
         <span class="n">WlanCloseHandle</span><span class="p">(</span><span class="n">hClient</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="p">}</span>
-</code></pre>
-</div>
-
-<p>启动承载网络前，需要将模式配置为allow状态，并设置SSID和密码。可以调用WlanHostedNetworkSetProperty进行设置，WlanHostedNetworkSetProperty原型如下：</p>
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">DWORD</span> <span class="n">WINAPI</span> <span class="n">WlanHostedNetworkSetProperty</span><span class="p">(</span>
+</code></pre></div> <p>启动承载网络前，需要将模式配置为allow状态，并设置SSID和密码。可以调用WlanHostedNetworkSetProperty进行设置，WlanHostedNetworkSetProperty原型如下：</p> <div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">DWORD</span> <span class="n">WINAPI</span> <span class="n">WlanHostedNetworkSetProperty</span><span class="p">(</span>
   <span class="n">_In_</span>        <span class="n">HANDLE</span> <span class="n">hClientHandle</span><span class="p">,</span>
   <span class="n">_In_</span>        <span class="n">WLAN_HOSTED_NETWORK_OPCODE</span> <span class="n">OpCode</span><span class="p">,</span>
   <span class="n">_In_</span>        <span class="n">DWORD</span> <span class="n">dwDataSize</span><span class="p">,</span>
@@ -138,13 +42,7 @@
   <span class="n">_Out_opt_</span>   <span class="n">PWLAN_HOSTED_NETWORK_REASON</span> <span class="n">pFailReason</span><span class="p">,</span>
   <span class="n">_Reserved_</span>  <span class="n">PVOID</span> <span class="n">pvReserved</span>
 <span class="p">);</span>
-</code></pre>
-</div>
-
-<p>其中hClientHandle是我们之前调用WlanOpenHnadle获得的句柄；dwDataSize指定了pvData缓冲区的大小，而pvData指向的变量类型取决与OpCode的取值。OpCode为WLAN_HOSTED_NETWORK_OPCODE枚举，如果指定为wlan_hosted_network_opcode_enable，那么pvData传入一个BOOL型的变量指针，用于指示承载网络模式为允许还是禁止(allow/disallow)；如果OpCode为wlan_hosted_network_opcode_connection_settings，那么pvData指向WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS结构体，指定承载网络的SSID和最大连接数目(peer count).</p>
-
-<p>示例代码：</p>
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="c1">// 设置承载网络模式为允许
+</code></pre></div> <p>其中hClientHandle是我们之前调用WlanOpenHnadle获得的句柄；dwDataSize指定了pvData缓冲区的大小，而pvData指向的变量类型取决与OpCode的取值。OpCode为WLAN_HOSTED_NETWORK_OPCODE枚举，如果指定为wlan_hosted_network_opcode_enable，那么pvData传入一个BOOL型的变量指针，用于指示承载网络模式为允许还是禁止(allow/disallow)；如果OpCode为wlan_hosted_network_opcode_connection_settings，那么pvData指向WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS结构体，指定承载网络的SSID和最大连接数目(peer count).</p> <p>示例代码：</p> <div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="c1">// 设置承载网络模式为允许
 </span>    <span class="n">BOOL</span> <span class="n">bIsAllow</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
     <span class="n">WLAN_HOSTED_NETWORK_REASON</span> <span class="n">dwFailedReason</span><span class="p">;</span>
     <span class="n">DWORD</span> <span class="n">dwReturnValue</span> <span class="o">=</span> <span class="n">WlanHostedNetworkSetProperty</span><span class="p">(</span><span class="n">hWlanClient</span><span class="p">,</span> 
@@ -193,11 +91,7 @@
     <span class="p">{</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
-</code></pre>
-</div>
-
-<p>调用WlanHostedNetworkSetSecondaryKey函数，设置承载网络的连接密码，函数原型如下：</p>
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">DWORD</span> <span class="n">WINAPI</span> <span class="n">WlanHostedNetworkSetSecondaryKey</span><span class="p">(</span>
+</code></pre></div> <p>调用WlanHostedNetworkSetSecondaryKey函数，设置承载网络的连接密码，函数原型如下：</p> <div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">DWORD</span> <span class="n">WINAPI</span> <span class="n">WlanHostedNetworkSetSecondaryKey</span><span class="p">(</span>
   <span class="n">_In_</span>        <span class="n">HANDLE</span> <span class="n">hClientHandle</span><span class="p">,</span>
   <span class="n">_In_</span>        <span class="n">DWORD</span> <span class="n">dwKeyLength</span><span class="p">,</span>
   <span class="n">_In_</span>        <span class="n">PUCHAR</span> <span class="n">pucKeyData</span><span class="p">,</span>
@@ -206,20 +100,7 @@
   <span class="n">_Out_opt_</span>   <span class="n">PWLAN_HOSTED_NETWORK_REASON</span> <span class="n">pFailReason</span><span class="p">,</span>
   <span class="n">_Reserved_</span>  <span class="n">PVOID</span> <span class="n">pvReserved</span>
 <span class="p">);</span>
-</code></pre>
-</div>
-<p>hClientHandle是我们之前调用WlanOpenHnadle获得的句柄；</p>
-
-<p>bIsPassPhrase表明传入pucKeyData的密码是否为口令格式，如果是口令格式，则是8-63位的ASCII字符串，该参数设置为TRUE；如果为16进制的binary，参数设置为FALSE；</p>
-
-<p>dwKeyLength是密码缓冲区的长度，密码为口令格式时，必须包括结尾的’\0’</p>
-
-<p>pucKeyData如果字符串，则必须为ANSI类型，因此如果IDE环境将字符串配置为UNICODE，需要做转换，可使用WideCharToMultiByte，或者T2A,W2A宏。</p>
-
-<p>bPersistent用来指示密码是否是持久的。如果不是，那么该密码只在本次启动有效；否则下次启动Soft AP依然使用本次设置的密码。</p>
-
-<p>示例代码：</p>
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">UCHAR</span> <span class="n">keyBuf</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</code></pre></div> <p>hClientHandle是我们之前调用WlanOpenHnadle获得的句柄；</p> <p>bIsPassPhrase表明传入pucKeyData的密码是否为口令格式，如果是口令格式，则是8-63位的ASCII字符串，该参数设置为TRUE；如果为16进制的binary，参数设置为FALSE；</p> <p>dwKeyLength是密码缓冲区的长度，密码为口令格式时，必须包括结尾的’\0’</p> <p>pucKeyData如果字符串，则必须为ANSI类型，因此如果IDE环境将字符串配置为UNICODE，需要做转换，可使用WideCharToMultiByte，或者T2A,W2A宏。</p> <p>bPersistent用来指示密码是否是持久的。如果不是，那么该密码只在本次启动有效；否则下次启动Soft AP依然使用本次设置的密码。</p> <p>示例代码：</p> <div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">UCHAR</span> <span class="n">keyBuf</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 <span class="cp">#ifdef _UNICODE
 </span>    <span class="n">WideCharToMultiByte</span><span class="p">(</span><span class="n">CP_ACP</span><span class="p">,</span>
         <span class="mi">0</span><span class="p">,</span>
@@ -243,10 +124,7 @@
     <span class="p">{</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
-</code></pre>
-</div>
-<p>启动或者停止Soft AP，需要用到如下四个函数：</p>
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">DWORD</span> <span class="n">WINAPI</span> <span class="n">WlanHostedNetworkStartUsing</span><span class="p">(</span>
+</code></pre></div> <p>启动或者停止Soft AP，需要用到如下四个函数：</p> <div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">DWORD</span> <span class="n">WINAPI</span> <span class="n">WlanHostedNetworkStartUsing</span><span class="p">(</span>
   <span class="n">_In_</span>        <span class="n">HANDLE</span> <span class="n">hClientHandle</span><span class="p">,</span>
   <span class="n">_Out_opt_</span>   <span class="n">PWLAN_HOSTED_NETWORK_REASON</span> <span class="n">pFailReason</span><span class="p">,</span>
   <span class="n">_Reserved_</span>  <span class="n">PVOID</span> <span class="n">pvReserved</span>
@@ -270,12 +148,7 @@
   <span class="n">_Out_opt_</span>   <span class="n">PWLAN_HOSTED_NETWORK_REASON</span> <span class="n">pFailReason</span><span class="p">,</span>
   <span class="n">_Reserved_</span>  <span class="n">PVOID</span> <span class="n">pvReserved</span>
 <span class="p">);</span>
-</code></pre>
-</div>
-<p>参数的含义很直观，这里不再做更多地解释。值得注意的是，如果用StartUsing或者StopUsing版本的函数时，如果有客户端连接到了AP，调用WlanHostedNetworkStopUsing并不能立即停止Soft AP，而要等到客户端主动断开连接后，Soft AP才会停止。如果调用带Force的函数版本，则会强制停止Soft AP，不管是否有客户端正在连接到该AP上。当然，调用带Force的函数版本需要程序以管理员方式启动。</p>
-
-<p>示例代码：</p>
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">dwReturnValue</span> <span class="o">=</span> <span class="n">WlanHostedNetworkStartUsing</span><span class="p">(</span><span class="n">m_hWlanClient</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dwFailedReason</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</code></pre></div> <p>参数的含义很直观，这里不再做更多地解释。值得注意的是，如果用StartUsing或者StopUsing版本的函数时，如果有客户端连接到了AP，调用WlanHostedNetworkStopUsing并不能立即停止Soft AP，而要等到客户端主动断开连接后，Soft AP才会停止。如果调用带Force的函数版本，则会强制停止Soft AP，不管是否有客户端正在连接到该AP上。当然，调用带Force的函数版本需要程序以管理员方式启动。</p> <p>示例代码：</p> <div class="language-c++ highlighter-rouge"><pre class="highlight"><code>    <span class="n">dwReturnValue</span> <span class="o">=</span> <span class="n">WlanHostedNetworkStartUsing</span><span class="p">(</span><span class="n">m_hWlanClient</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dwFailedReason</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span><span class="n">ERROR_SUCCESS</span> <span class="o">!=</span> <span class="n">dwReturnValue</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">wlan_hosted_network_reason_interface_unavailable</span> <span class="o">==</span> <span class="n">dwFailedReason</span><span class="p">)</span>
@@ -290,81 +163,5 @@
     <span class="p">{</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
-</code></pre>
-</div>
-<p>启动Soft AP后，绑定Ip需要一定的时间，一般为2-3秒。Ip地址一般为192.168.173.1（也有可能是192.168.137.1）.</p>
-
-<p>调试程序时，可使用命令行方式使用Soft AP（管理员方式打开cmd）:</p>
-
-<p>查看当前承载网络状态 - netsh wlan show hostednetwork</p>
-
-<p>配置承载网络属性，如SSID,密码等 - netsh wlan set hostednetwork ssid=***** key=***** mode=allow|disallow  (星号部分为ascii字符，key必须在8-63个字符之间)</p>
-
-<p>启动承载网络 - netsh wlan start hostednetwork</p>
-
-<p>关闭承载网络 - netsh wlan stop hostednetwork</p>
-
-<p><img src="http://www.sujing.info/assets/img/soft_ap.png" alt="soft_ap" /></p>
-
-
-  </div>
-
-  
-</article>
-
-      </div>
-    </main>
-
-    <footer class="site-footer">
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">&lt;Coding/&gt; - 午夜场</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>
-            
-              &lt;Coding/&gt; - 午夜场
-            
-            </li>
-            
-            <li><a href="mailto:solarwindsj@gmail.com">solarwindsj@gmail.com</a></li>
-            
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          
-          <li>
-            <a href="https://github.com/radiolover"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
-</span><span class="username">radiolover</span></a>
-
-          </li>
-          
-
-          
-          <li>
-            <a href="https://twitter.com/solarwindsj"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
-</span><span class="username">solarwindsj</span></a>
-
-          </li>
-          
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>&lt;Coding/&gt; - 午夜场 - 一个想用技术改变世界却被世界用魔术改变的人的一些事情 - 科技美学 - 爱好天文的工程师 - 上海 - WIRELESS - 区块链 - 自驾旅行 - 尼康爱好者 - EDM - 火车迷 - 极简主义</p>
-      </div>
-    </div>
-
-  </div>
-
-</footer>
-
-
-  </body>
-
-</html>
+</code></pre></div> <p>启动Soft AP后，绑定Ip需要一定的时间，一般为2-3秒。Ip地址一般为192.168.173.1（也有可能是192.168.137.1）.</p> <p>调试程序时，可使用命令行方式使用Soft AP（管理员方式打开cmd）:</p> <p>查看当前承载网络状态 - netsh wlan show hostednetwork</p> <p>配置承载网络属性，如SSID,密码等 - netsh wlan set hostednetwork ssid=***** key=***** mode=allow|disallow (星号部分为ascii字符，key必须在8-63个字符之间)</p> <p>启动承载网络 - netsh wlan start hostednetwork</p> <p>关闭承载网络 - netsh wlan stop hostednetwork</p> <p><img src="http://www.sujing.info/assets/img/soft_ap.png" alt="soft_ap"></p> <div class="entry-meta"> <br> <hr> <span class="entry-tags"></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.sujing.info/2013/09/15/Visual-C-%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0Soft-AP-HostedNetwork-%E6%89%BF%E8%BD%BD%E7%BD%91%E7%BB%9C-%E5%8A%9F%E8%83%BD.html" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=http://www.sujing.info/2013/09/15/Visual-C-%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0Soft-AP-HostedNetwork-%E6%89%BF%E8%BD%BD%E7%BD%91%E7%BB%9C-%E5%8A%9F%E8%83%BD.html" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=http://www.sujing.info/2013/09/15/Visual-C-%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0Soft-AP-HostedNetwork-%E6%89%BF%E8%BD%BD%E7%BD%91%E7%BB%9C-%E5%8A%9F%E8%83%BD.html" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> <section id="disqus_thread" class="animated fadeInUp"></section><!-- /#disqus_thread --> </header> <!-- JS --> <script src="http://www.sujing.info/assets/js/jquery-1.12.0.min.js"></script> <script src="http://www.sujing.info/assets/js/jquery.dlmenu.min.js"></script> <script src="http://www.sujing.info/assets/js/jquery.goup.min.js"></script> <script src="http://www.sujing.info/assets/js/jquery.magnific-popup.min.js"></script> <script src="http://www.sujing.info/assets/js/jquery.fitvid.min.js"></script> <script src="http://www.sujing.info/assets/js/scripts.js"></script> <script type="text/javascript"> var disqus_shortname = 'comt'; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })(); (function () { var s = document.createElement('script'); s.async = true; s.type = 'text/javascript'; s.src = '//' + disqus_shortname + '.disqus.com/count.js'; (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s); }()); </script> <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>
