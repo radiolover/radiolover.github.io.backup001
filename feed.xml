@@ -1,4 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://www.sujing.info/feed.xml" rel="self" type="application/atom+xml" /><link href="http://www.sujing.info/" rel="alternate" type="text/html" /><updated>2018-01-18T17:39:39+08:00</updated><id>http://www.sujing.info/</id><title type="html">/* Coding - 午夜场 */</title><subtitle>一个想用技术改变世界却被世界用魔术改变的人的一些事情</subtitle><entry><title type="html">Git简易参考手册</title><link href="http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html" rel="alternate" type="text/html" title="Git简易参考手册" /><published>2017-09-16T05:52:47+08:00</published><updated>2017-09-16T05:52:47+08:00</updated><id>http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C</id><content type="html" xml:base="http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html">&lt;p&gt;如果用过mercury(HG)，那么理解Git的运作方式就轻松多了。两者是相同的分布式版本管理工具，只是某些功能有着细微的差别 - Git的管理粒度更加细腻，因此操作上也比HG复杂一点。例如，修改文件并提交，hg会自动跟踪到，并不需要你去手动add，但是在git里，无论新增还是修改，都必须add相应的文件才可以commit.这样概念上可以保持一致性（计算机的美学）。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://www.sujing.info/feed.xml" rel="self" type="application/atom+xml" /><link href="http://www.sujing.info/" rel="alternate" type="text/html" /><updated>2018-02-10T16:57:26+08:00</updated><id>http://www.sujing.info/</id><title type="html">/* Coding - 午夜场 */</title><subtitle>一个想用技术改变世界却被世界用魔术改变的人的一些事情</subtitle><entry><title type="html">成都的雾霾</title><link href="http://www.sujing.info/2018/02/10/%E6%88%90%E9%83%BD%E7%9A%84%E9%9B%BE%E9%9C%BE.html" rel="alternate" type="text/html" title="成都的雾霾" /><published>2018-02-10T15:11:37+08:00</published><updated>2018-02-10T15:11:37+08:00</updated><id>http://www.sujing.info/2018/02/10/%E6%88%90%E9%83%BD%E7%9A%84%E9%9B%BE%E9%9C%BE</id><content type="html" xml:base="http://www.sujing.info/2018/02/10/%E6%88%90%E9%83%BD%E7%9A%84%E9%9B%BE%E9%9C%BE.html">&lt;p&gt;下图来自NASA Terra卫星于2017年12月22日拍摄的全彩画面。&lt;/p&gt;
+
+&lt;p&gt;四川盆地堆积着浓郁的雾霾，由于无风而扩散不出去。&lt;/p&gt;
+
+&lt;p&gt;左边是青藏高原，海拔高，空气干净，雪山清晰可见。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.sujing.info/assets/img/fog.jpg&quot; alt=&quot;fog&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">下图来自NASA Terra卫星于2017年12月22日拍摄的全彩画面。</summary></entry><entry><title type="html">Git简易参考手册</title><link href="http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html" rel="alternate" type="text/html" title="Git简易参考手册" /><published>2017-09-16T05:52:47+08:00</published><updated>2017-09-16T05:52:47+08:00</updated><id>http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C</id><content type="html" xml:base="http://www.sujing.info/2017/09/16/Git%E7%AE%80%E6%98%93%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.html">&lt;p&gt;如果用过mercury(HG)，那么理解Git的运作方式就轻松多了。两者是相同的分布式版本管理工具，只是某些功能有着细微的差别 - Git的管理粒度更加细腻，因此操作上也比HG复杂一点。例如，修改文件并提交，hg会自动跟踪到，并不需要你去手动add，但是在git里，无论新增还是修改，都必须add相应的文件才可以commit.这样概念上可以保持一致性（计算机的美学）。&lt;/p&gt;
 
 &lt;p&gt;安装和创建版本库：&lt;/p&gt;
 
@@ -249,7 +255,7 @@
 
 &lt;p&gt;再举一个上一节使用过的例子：&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_exam_&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -569,41 +575,4 @@ fValTwo = fVal + nVal ; // nVal类型提升为double
 
 &lt;p&gt;显然，并行的计算，且每一个并行分支含有极高次迭代的循环结构，利用率是最好的。因此使用者设计代码时要尽量符合这样的标准。&lt;/p&gt;
 
-&lt;p&gt;从更高层次考虑，结构化程序理论表明，任何过程式语言都可以通过顺序、分支、循环三种基本结构进行组合。考虑将编程的基本单位，从语句提升为“算元”。经过精心挑选的基本算元（甚至可以是更高层的算法库）已安装在矿机中，使用者只需将运算过程（重复率很高的）按照一定的格式提交到全网，由网络自动分配算力，即可实现高效的利用。当然，这需要开发一种新的脚本语言。&lt;/p&gt;</content><author><name></name></author><summary type="html">比特币最近几年非常火爆。发明者中本聪设计了一个特定的算法用于生成（发行）比特币，让各位玩家（矿工）用自己的CPU、显卡，或者更加专业的矿机，通过无聊的并行计算算出比特币的特定密码（挖矿）。为了保证全网比特币按照特定的发行速度递增，并最终无限趋近于上限2100万枚，挖矿难度会根据全网算力进行动态调整。由于进场人数急剧增加，谁的算力大，谁挖到比特币的几率就高，因此这是一个类似于“军备竞赛”的过程。前期硬件投入，加上巨大的电力消耗，回本机会往往非常渺茫，更重要的是，全网如此巨大的计算力白白地消耗在毫无意义的运算中。从比特币衍生出的各类山寨币，其运作机制完全相同，同样在无畏地消耗着大量算力。</summary></entry><entry><title type="html">Linux Bash环境下特殊符号转义的小结</title><link href="http://www.sujing.info/2014/02/18/Linux-Bash%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E8%BD%AC%E4%B9%89%E7%9A%84%E5%B0%8F%E7%BB%93.html" rel="alternate" type="text/html" title="Linux Bash环境下特殊符号转义的小结" /><published>2014-02-18T02:42:12+08:00</published><updated>2014-02-18T02:42:12+08:00</updated><id>http://www.sujing.info/2014/02/18/Linux-Bash%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E8%BD%AC%E4%B9%89%E7%9A%84%E5%B0%8F%E7%BB%93</id><content type="html" xml:base="http://www.sujing.info/2014/02/18/Linux-Bash%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E8%BD%AC%E4%B9%89%E7%9A%84%E5%B0%8F%E7%BB%93.html">&lt;p&gt;在bash中，$、*、?、[、]、’、”、`、\、有特殊的含义。类似于编译器的预编译过程，bash在扫描命令行的过程中，会在文本层次上，优先解释所有的特殊字符，之后对转换完成的新命令行，进行内核的系统调用。&lt;/p&gt;
-
-&lt;p&gt;其中，反引号类似于函数调用，而不仅仅是简单的文本替换及匹配。&lt;/p&gt;
-
-&lt;p&gt;命令行中，被单引号引用的部分，其中所有的特殊字符按照普通字符解释；&lt;/p&gt;
-
-&lt;p&gt;双引号引用的部分，仅解释$（美元符号）、\（\n \t除外）、`（反引号），解释后的文本仅按照普通文字处理（同单引号）。&lt;/p&gt;
-
-&lt;p&gt;反引号相当于命令替换，引用的部分优先执行，将运行结果替换到外层的命令行文本中；反引号可以嵌套，但是嵌套时内部的反引号必须用\转义&lt;/p&gt;
-
-&lt;p&gt;反斜杠用于命令换行，以及echo -e解释。&lt;/p&gt;
-
-&lt;p&gt;网上各种文章常见的例子，其中第二行重点介绍一下：&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# x=*                     
-# echo $x　　　　　　此行执行了两次替换，将$x替换为*，之后将*替换为当前目录下所有文件列表的文本，
-
-　　　　　　　　　　该文本作为参数赋给echo（bash会自动按照优先级，进行多层次替换 ）
-hello.sh menus.sh misc.sh phonebook tshift.sh
-# echo '$x'               $x不进行任何解释，直接将文本‘$x’作为参数赋给echo
-$x
-# echo &quot;$x&quot;              $x替换为*，但是由于在双引号内，*不做替换，因此文本“*”将作为参数赋给echo
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Tips:&lt;/p&gt;
-
-&lt;p&gt;大多数Linux Distribution的默认shell为bash，查询当前主机所有shell可执行如下命令：&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cat  /etc/shell
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;bash内部集成了40多条命令，通用格式为：&lt;/p&gt;
-
-&lt;p&gt;$ 命令 [-选项] [参数]&lt;/p&gt;
-
-&lt;p&gt;其中，”-“后为单字符选项，”–“后为完整的单词选项。一般来说，命令的某项功能(feature)，会同时支持单字符选项及对应的多字符选项。&lt;/p&gt;
-
-&lt;p&gt;在bash中，&lt;em&gt;、?、[、]有特殊的含义，用于字符匹配。&lt;/em&gt;代表0到多个字符，？代表单个字符。[]用于匹配单个字符，内部用短横线按照ASCII码顺序标明匹配的字符范围，或者枚举所有要匹配的字符。&lt;/p&gt;</content><author><name></name></author><summary type="html">在bash中，$、*、?、[、]、’、”、`、\、有特殊的含义。类似于编译器的预编译过程，bash在扫描命令行的过程中，会在文本层次上，优先解释所有的特殊字符，之后对转换完成的新命令行，进行内核的系统调用。</summary></entry></feed>
+&lt;p&gt;从更高层次考虑，结构化程序理论表明，任何过程式语言都可以通过顺序、分支、循环三种基本结构进行组合。考虑将编程的基本单位，从语句提升为“算元”。经过精心挑选的基本算元（甚至可以是更高层的算法库）已安装在矿机中，使用者只需将运算过程（重复率很高的）按照一定的格式提交到全网，由网络自动分配算力，即可实现高效的利用。当然，这需要开发一种新的脚本语言。&lt;/p&gt;</content><author><name></name></author><summary type="html">比特币最近几年非常火爆。发明者中本聪设计了一个特定的算法用于生成（发行）比特币，让各位玩家（矿工）用自己的CPU、显卡，或者更加专业的矿机，通过无聊的并行计算算出比特币的特定密码（挖矿）。为了保证全网比特币按照特定的发行速度递增，并最终无限趋近于上限2100万枚，挖矿难度会根据全网算力进行动态调整。由于进场人数急剧增加，谁的算力大，谁挖到比特币的几率就高，因此这是一个类似于“军备竞赛”的过程。前期硬件投入，加上巨大的电力消耗，回本机会往往非常渺茫，更重要的是，全网如此巨大的计算力白白地消耗在毫无意义的运算中。从比特币衍生出的各类山寨币，其运作机制完全相同，同样在无畏地消耗着大量算力。</summary></entry></feed>
